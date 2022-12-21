@@ -86,13 +86,13 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
       Util.print('remember_checked: '+ storage.read('remember_checked'));
 
 
-      currentUser.value.truckNumber = carNumber.text;
-      currentUser.value.phoneNumber = phoneNumber.text;
-      currentUser.value.password = pwdInput.text;
+      // currentUser.value.truckNumber = carNumber.text;
+      // currentUser.value.phoneNumber = phoneNumber.text;
+      // currentUser.value.password = pwdInput.text;
 
-      // currentUser.value.truckNumber = '88가8888';
-      // currentUser.value.phoneNumber = '01088887278';
-      // currentUser.value.password = '72788888';
+      currentUser.value.truckNumber = '88가8888';
+      currentUser.value.phoneNumber = '01088887278';
+      currentUser.value.password = '72788888';
 
       var user = await _userRepository.login(currentUser.value);
 
@@ -118,25 +118,5 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
         Util.print('로그인 중 에러가 발생하였습니다.');
         Util.print(e);
       }
-  }
-
-
-  /**
-   * 로그아웃 처리
-   */
-  Future<void> logout() async {
-    try {
-      await _userRepository.logout();
-
-      user.value = new User();
-      vehicle.value = new Vehicle();
-      comp.value = new Comp();
-      phoneNumber.clear();
-      pwdInput.clear();
-      carNumber.clear();
-    }
-    catch(e) {
-      Get.log('${e}');
-    }
   }
 }

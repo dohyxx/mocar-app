@@ -11,9 +11,10 @@ import 'package:mocar_test/app/services/settings_service.dart';
 
 void initServices() async {
   Get.log('starting services ...');
+  await GetStorage.init();
   await Get.putAsync(() async => AuthService().init());
   await Get.put(AuthController());
-  await Get.put(AuthService());
+  //await Get.put(AuthService());
   await Get.putAsync(() async => GlobalService().init());
   await Get.putAsync(() async => LaravelApiClient().init());
   await Get.putAsync(() async => SettingsService().init());
@@ -21,13 +22,9 @@ void initServices() async {
 
   GetStorage _box = new GetStorage();
 
-  if(_box.read('remember_checked').toString().isEmpty) {
-    _box.write('remember_checked', false);
-    Get.log('isRememberMe value in empty if: '+_box.read('remember_checked').toString());
-  }
-  if(_box.read('remember_checked').toString() == 'false'){
+  if(_box.read('remember_checked').toString().isEmpty || _box.read('remember_checked').toString() != 'true'){
     Get.find<AuthService>().removeCurrentUser();
-    Get.log('isRememberMe value in false if: '+_box.read('remember_checked').toString());
+    Get.log('<===== isRememberMe value in false if: '+_box.read('remember_checked').toString());
   }
 
   Get.log('All services started...');

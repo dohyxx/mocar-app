@@ -20,13 +20,11 @@ class User extends Model {
   String memo;              //메모
   String createDate;        //생성일
   String crtUserSn;         //등록자
-
   String truckNumber;       //차량번호
   String password;          //비밀번호
   int vehicleSn;            //차량 일련번호
 
   bool auth;                //권한 여부
-  bool firstAuth = true;    //최초인증여부
   String jwtToken;          //JWT 토큰
 
 

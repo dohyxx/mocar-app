@@ -19,14 +19,8 @@ class IntroController extends GetxController {
 
     // 1초 뒤에 화면 이동처리 한다.
     new Timer(const Duration(milliseconds: 1*1000), () {
-        //최초 접속 여부를 체크 후 화면 분기 처리
-        if(_box.hasData('isFirst') == false){
-          _box.write('isFirst', false);
-
-          Get.offAllNamed(Routes.LOGINVIEW);
-        }else{
+          //메인 화면 이동 후 권한 여부 체크
           Get.offAllNamed(Routes.MAINVIEW);
-        }
       }
     );
   }

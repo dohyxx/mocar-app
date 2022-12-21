@@ -4,6 +4,7 @@ import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
 import 'package:mocar_test/app/modules/auth/controllers/user_controller.dart';
 import 'package:mocar_test/app/modules/auth/widgets/enterprise_info_detail_widget.dart';
 import 'package:mocar_test/app/modules/auth/widgets/user_info_detail_widget.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 
 import '../../../routes/app_routes.dart';
 
@@ -182,9 +183,9 @@ class UserInfoWidget extends GetView<UserController> {
                                             onPressed: () async {
                                               Get.log('<====== 로그아웃 버튼 클릭...');
                                               Future.delayed(const Duration(milliseconds: 1500), () async {
-                                                await Get.find<AuthController>().logout();
-                                                await Get.offAllNamed(Routes.LOGINVIEW);
+                                                await Get.find<AuthService>().removeCurrentUser();
                                               });
+                                              await Get.offAllNamed(Routes.LOGINVIEW);
                                             },
                                             shape: RoundedRectangleBorder(
                                                 side: BorderSide(
