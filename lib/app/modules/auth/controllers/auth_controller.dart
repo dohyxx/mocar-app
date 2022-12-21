@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/user_model.dart';
 import 'package:mocar_test/app/modules/auth/controllers/user_controller.dart';
 import 'package:mocar_test/app/repositories/user_repository.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 import '../../../models/comp_model.dart';
 import '../../../models/vehicle_model.dart';
 
 
 
 class AuthController extends GetxController with GetSingleTickerProviderStateMixin {
+  final Rx<User> currentUser = Get.find<AuthService>().user;
 
   // GlobalKey<FormState> loginFormKey;
   final isContentLoading = true.obs;
@@ -31,9 +34,10 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
   var carNumber = TextEditingController();
 
 
-
   // 로그인 유지 여부
   final isRememberMe = false.obs;
+  GetStorage storage = new GetStorage();
+
 
   //드랍다운
   var assignedTask = '진행상태'.obs;
@@ -75,30 +79,45 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
    */
   void login() async {
 
+    isContentLoading.value = true;
     try {
-      user.value.carNumber = carNumber.text;
-      user.value.phoneNumber = phoneNumber.text;
-      user.value.password = pwdInput.text;
+      //자동 로그인 여부
+      storage.write('remember_checked', isRememberMe.value.toString());
+      Util.print('remember_checked: '+ storage.read('remember_checked'));
 
-      // user.value.carNumber = '서울66육6666';
-      // user.value.phoneNumber = '01012345678';
-      // user.value.password = '1234';
 
-    var result = await _userRepository.login(user.value);
+      currentUser.value.truckNumber = carNumber.text;
+      currentUser.value.phoneNumber = phoneNumber.text;
+      currentUser.value.password = pwdInput.text;
 
-    if(result == "success") {
-      await Get.put(UserController());
+      // currentUser.value.truckNumber = '88가8888';
+      // currentUser.value.phoneNumber = '01088887278';
+      // currentUser.value.password = '72788888';
 
-      Future.delayed(const Duration(milliseconds: 1000), (){
-        Get.offAllNamed(Routes.MAINVIEW);
-      });
-    }else{
-      Util.alert('로그인 정보가 일치하지 않습니다.');
-    }
+      var user = await _userRepository.login(currentUser.value);
 
-    } catch (e) {
+      if(user != null) {
+        //입력값 초기화
+        carNumber.text = '';
+        phoneNumber.text = '';
+        pwdInput.text = '';
+        isRememberMe.value = false;
 
-    }
+        currentUser.value = user;
+
+        //await Get.put(UserController());
+
+        Future.delayed(const Duration(milliseconds: 1000), (){
+          Get.offAllNamed(Routes.MAINVIEW);
+        });
+      }else{
+        Util.alert('로그인 정보가 일치하지 않습니다.');
+      }
+
+      } catch (e) {
+        Util.print('로그인 중 에러가 발생하였습니다.');
+        Util.print(e);
+      }
   }
 
 

@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:get/get.dart';
+import 'package:mocar_test/app/common/util.dart';
 import '../models/comp_model.dart';
 import '../models/user_model.dart';
 import '../models/vehicle_model.dart';
@@ -44,30 +45,53 @@ class LaravelApiClient extends GetxService with ApiClient {
   /**
    * 로그인 처리
    */
-  Future<String> login(User user) async{
+  Future<User> login(User user) async{
+    //JWT 토큰 발급
+    String _jwtToken = '';
+    int _vehicleSn;
+    Uri _uri = getApiBaseUri("login");
+    Get.log('<==== 로그인 처리: ' +_uri.toString());
+    var response = null;
+
+    var _queryParameters = {
+      'vehicleNo' : user.truckNumber.toString(),
+      'phoneNo' : user.phoneNumber.toString(),
+      'password' : user.password.toString(),
+    };
+
     try{
-      var _queryParameters = {
-        'vehicleNo' : user.carNumber.toString(),
-        'phoneNo' : user.phoneNumber.toString(),
-        'password' : user.password.toString(),
-      };
-
-      Uri _uri = getApiBaseUri("login");
-      Get.log('<==== _uri : ' +_uri.toString());
-      Get.log('<==== _queryParameters : ' +_queryParameters.toString());
-
-      var response = await _httpClient.postUri(_uri, data: _queryParameters, options: _optionsCache);
-      Get.log('<==== 로그인 API : ' +response.data.toString());
+      response = await _httpClient.postUri(_uri, data: _queryParameters, options: _optionsCache);
 
       if (response.data['resultCode'] == 200) {
-        user.jwtToken = response.data['body']['acc_token'];
-        return response.data['resultMessage'];
+        _jwtToken = response.data['body']['acc_token'];
+        _vehicleSn = response.data['body']['vehicle_id'];
       }
       else {
-        return response.data['message'];
+        throw new Exception(response.data['message']);
       }
     }catch (e) {
+      print(e);
+      return null;
     }
+
+    //사용자 정보 가져오기
+    User loginUser = null;
+    _uri = getApiBaseUri("info/my");
+    Get.log('<==== 토큰 발급 후 사용자 정보 가져오기: ' +_uri.toString());
+    _httpClient.options.headers['authorization'] = 'Bearer ${_jwtToken}';
+    response = await _httpClient.postUri(_uri, options: _optionsCache);
+
+    if (response.data['resultCode'] == 200) {
+      response.data['data']['auth'] = true;
+      response.data['data']['jwt_token'] = _jwtToken;
+      response.data['data']['vehicleSn'] = _vehicleSn;
+      loginUser = User.fromJson(response.data['data']);
+    }else{
+      return null;
+    }
+
+    Util.print("loginUser: ${loginUser}");
+    return loginUser;
   }
 
 

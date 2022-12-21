@@ -11,7 +11,7 @@ class UserRepository {
   /**
    * 회원 로그인
     */
-    Future<String> login(User user) async{
+    Future<User> login(User user) async{
       _laravelApiClient = Get.find<LaravelApiClient>();
       return _laravelApiClient.login(user);
   }

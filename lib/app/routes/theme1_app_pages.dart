@@ -1,4 +1,5 @@
-import 'package:get/get.dart' show GetPage;
+import 'package:get/get.dart' show GetPage, Transition;
+import 'package:mocar_test/app/middlewares/auth_middleware.dart';
 import 'package:mocar_test/app/modules/alarm/bindings/alarm_binding.dart';
 import 'package:mocar_test/app/modules/alarm/views/alarm_list_view.dart';
 import 'package:mocar_test/app/modules/conveyance/bindings/conveyance_binding.dart';
@@ -32,7 +33,7 @@ class Theme1AppPages {
     GetPage(name: Routes.LOGINVIEW3, page: () => MocarLoginView3(), binding: AuthBinding()),
 
     //메인
-    GetPage(name: Routes.MAINVIEW, page: () => MainView(), binding: RootBinding()),
+    GetPage(name: Routes.MAINVIEW, page: () => MainView(), middlewares: [AuthMiddleware()], binding: RootBinding(), transition: Transition.zoom),
 
     //배송
     GetPage(name: Routes.DELIVERYSTAT, page: () => DeliveryStatView(), binding: DeliveryBinding()),
