@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../routes/app_routes.dart';
 
 class IntroController extends GetxController {
+  GetStorage _box;
 
 
   IntroController() {
-
+    _box = new GetStorage();
   }
 
   @override
@@ -17,7 +19,14 @@ class IntroController extends GetxController {
 
     // 1초 뒤에 화면 이동처리 한다.
     new Timer(const Duration(milliseconds: 1*1000), () {
-        Get.offAllNamed(Routes.LOGINVIEW);
+        //최초 접속 여부를 체크 후 화면 분기 처리
+        if(_box.hasData('isFirst') == false){
+          _box.write('isFirst', false);
+
+          Get.offAllNamed(Routes.LOGINVIEW);
+        }else{
+          Get.offAllNamed(Routes.MAINVIEW);
+        }
       }
     );
   }

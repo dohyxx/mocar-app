@@ -3,13 +3,10 @@ import 'package:get/get.dart';
 import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/user_model.dart';
 import 'package:mocar_test/app/modules/auth/controllers/user_controller.dart';
-import 'package:mocar_test/app/modules/cost/controllers/cost_controller.dart';
 import 'package:mocar_test/app/repositories/user_repository.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
-
 import '../../../models/comp_model.dart';
 import '../../../models/vehicle_model.dart';
-import '../../alarm/controllers/alarm_controller.dart';
 
 
 
@@ -33,7 +30,6 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
   var pwdInput = TextEditingController();
   var carNumber = TextEditingController();
 
-  //전체 공지
 
 
   // 로그인 유지 여부
