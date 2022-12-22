@@ -19,18 +19,5 @@ class UserController extends GetxController {
    */
   Future<void> onRefresh() async {
     Get.log('<====== onRefresh');
-    await getUserInfo();
   }
-
-  /**
-   * 내 정보 조회
-   */
-  Future<void> getUserInfo() async {
-    try {
-      await _userRepository.getUserInfo();
-    }
-    catch(e) {
-    }
-  }
-
 }

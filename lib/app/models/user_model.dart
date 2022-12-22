@@ -55,7 +55,7 @@ class User extends Model {
     crtUserSn = stringFromJson(json, 'created_user');
     password = stringFromJson(json, 'password');
 
-    vehicleSn = intFromJson(json, 'vehicleSn');
+    vehicleSn = intFromJson(json, 'vehicle_id');
     auth = boolFromJson(json, 'auth');
     jwtToken = stringFromJson(json, 'jwt_token');
 
@@ -65,8 +65,8 @@ class User extends Model {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['user_sn'] = this.user_sn;
-    data['ship_comp_id'] = this.termsAgreeId;
+    data['id'] = this.user_sn;
+    data['ship_comp_id'] = this.shipCompId;
     data['terms_agree_id'] = this.termsAgreeId;
     data['driver_nm'] = this.driverNm;
     data['phone_os_type_cd'] = this.phoneOsTypeCd;

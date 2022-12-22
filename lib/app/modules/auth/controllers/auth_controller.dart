@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/user_model.dart';
-import 'package:mocar_test/app/modules/auth/controllers/user_controller.dart';
 import 'package:mocar_test/app/repositories/user_repository.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
 import 'package:mocar_test/app/services/auth_service.dart';
@@ -75,7 +74,7 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
 
 
   /**
-   *  회원 로그인
+   *  로그인 처리
    */
   void login() async {
 
@@ -85,15 +84,10 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
       storage.write('remember_checked', isRememberMe.value.toString());
       Util.print('remember_checked: '+ storage.read('remember_checked'));
 
-
-      // currentUser.value.truckNumber = carNumber.text;
-      // currentUser.value.phoneNumber = phoneNumber.text;
-      // currentUser.value.password = pwdInput.text;
-
-      currentUser.value.truckNumber = '88가8888';
-      currentUser.value.phoneNumber = '01088887278';
-      currentUser.value.password = '72788888';
-
+      currentUser.value.truckNumber = carNumber.text;
+      currentUser.value.phoneNumber = phoneNumber.text;
+      currentUser.value.password = pwdInput.text;
+      
       var user = await _userRepository.login(currentUser.value);
 
       if(user != null) {
@@ -105,7 +99,6 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
 
         currentUser.value = user;
 
-        //await Get.put(UserController());
 
         Future.delayed(const Duration(milliseconds: 1000), (){
           Get.offAllNamed(Routes.MAINVIEW);

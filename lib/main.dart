@@ -14,7 +14,7 @@ void initServices() async {
   await GetStorage.init();
   await Get.putAsync(() async => AuthService().init());
   await Get.put(AuthController());
-  //await Get.put(AuthService());
+  await Get.put(AuthService());
   await Get.putAsync(() async => GlobalService().init());
   await Get.putAsync(() async => LaravelApiClient().init());
   await Get.putAsync(() async => SettingsService().init());
@@ -27,7 +27,6 @@ void initServices() async {
     Get.log('Current user Storage(remember_checked) Deleted: '+_box.read('remember_checked').toString());
   }else{
     Get.log('Current user Storage(remember_checked): '+_box.read('remember_checked').toString());
-
   }
 
   Get.log('All services started...');

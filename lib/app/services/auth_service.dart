@@ -1,22 +1,19 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mocar_test/app/common/util.dart';
-
 import '../models/user_model.dart';
-import '../repositories/user_repository.dart';
 
 class AuthService extends GetxService {
   final user = User().obs;
   GetStorage _box;
 
-  UserRepository _usersRepo;
 
   AuthService() {
-    _usersRepo = new UserRepository();
     _box = new GetStorage();
   }
 
   Future<AuthService> init() async {
+
     user.listen((User _user) {
       _box.write('current_user', _user.toJson());
     });
@@ -26,7 +23,6 @@ class AuthService extends GetxService {
   }
 
   Future getCurrentUser() async {
-
     if (user.value.auth == null && _box.hasData('current_user')) {
       user.value = User.fromJson(await _box.read('current_user'));
       user.value.auth = true;
@@ -34,6 +30,7 @@ class AuthService extends GetxService {
       user.value.auth = false;
     }
   }
+
 
   /**
    * 로그아웃 처리

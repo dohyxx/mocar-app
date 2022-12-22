@@ -3,10 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mocar_test/app/common/ui.dart';
 import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/alarm/alarm.dart';
 import 'package:mocar_test/app/models/cost/cost.dart';
+import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
+import 'package:mocar_test/app/repositories/user_repository.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 import 'package:mocar_test/app/services/driver_work_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -16,6 +20,10 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
 
   final isContentLoading = true.obs;
   ScrollController scrollController;
+  UserRepository _userRepository;
+
+  GetStorage _box = new GetStorage();
+
 
 
 
@@ -37,6 +45,7 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
 
   RootController(){
     scrollController = new ScrollController();
+    _userRepository = new UserRepository();
   }
 
 
@@ -53,11 +62,15 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
    */
   void onRefresh() async {
     isContentLoading.value = true;
-    await getMonthCost();
-    await getNoticeCnt();
-    await getDeliveryCnt();
-    await getAlarmCnt();
-    await getAlarmList();
+    //await getMonthCost();
+    //await getNoticeCnt();
+    //await getDeliveryCnt();
+    //await getAlarmCnt();
+    //await getAlarmList();
+
+    Util.print('AuthController 유저 정보:   ${Get.find<AuthController>().currentUser.value}');
+    Util.print('AuthService 유저 정보:   ${Get.find<AuthService>().user.value}');
+    Util.print('storage 유저 정보:   ${_box.read('current_user')}');
 
     isContentLoading.value = false;
   }
@@ -135,6 +148,18 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
         Util.print(e);
     }
   }
+
+  // /**
+  //  * 내 정보 조회
+  //  */
+  // void getUserInfo() async {
+  //   try {
+  //     await _userRepository.getUserInfo();
+  //   }
+  //   catch(e) {
+  //     Util.print(e);
+  //   }
+  // }
 
 
 

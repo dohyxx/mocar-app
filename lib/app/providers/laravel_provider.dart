@@ -84,7 +84,7 @@ class LaravelApiClient extends GetxService with ApiClient {
     if (response.data['resultCode'] == 200) {
       response.data['data']['auth'] = true;
       response.data['data']['jwt_token'] = _jwtToken;
-      response.data['data']['vehicleSn'] = _vehicleSn;
+      response.data['data']['vehicle_id'] = _vehicleSn;
       loginUser = User.fromJson(response.data['data']);
     }else{
       return null;

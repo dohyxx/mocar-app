@@ -19,7 +19,7 @@ class SettingsService extends GetxService {
     _box = new GetStorage();
     today = DateTime.now();
 
-    Get.log('<======= 현재 날짜: ${today.toString()}');
+    //Get.log('<======= 현재 날짜: ${today.toString()}');
   }
 
   Future<SettingsService> init() async {

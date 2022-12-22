@@ -11,6 +11,7 @@ import 'package:mocar_test/app/modules/root/widget/main_menu_card_widget.dart';
 import 'package:mocar_test/app/modules/root/widget/main_card_widget.dart';
 import 'package:mocar_test/app/modules/auth/widgets/user_info_widget.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 import 'package:mocar_test/app/services/settings_service.dart';
 
 import '../../auth/controllers/auth_controller.dart';
@@ -22,7 +23,7 @@ class MainView extends GetView<RootController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DeliveryController());
+    //Get.put(DeliveryController());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -134,7 +135,7 @@ class MainView extends GetView<RootController> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    '${Get.find<AuthController>().user.value.driverNm} 기사님',
+                                                    '${Get.find<AuthService>().user.value.driverNm} 기사님',
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
@@ -182,7 +183,6 @@ class MainView extends GetView<RootController> {
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                //내 정보 보기 팝업
                                                 Get.bottomSheet(
                                                   UserInfoWidget(),
                                                   isScrollControlled: true,
