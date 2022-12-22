@@ -47,6 +47,7 @@ class AuthService extends GetxService {
 
       user.value = new User();
       await _box.remove('current_user');
+      //await _box.remove('remember_checked');
     }catch(e){
       Util.print(e);
     }

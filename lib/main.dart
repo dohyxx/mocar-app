@@ -24,7 +24,10 @@ void initServices() async {
 
   if(_box.read('remember_checked').toString().isEmpty || _box.read('remember_checked').toString() != 'true'){
     Get.find<AuthService>().removeCurrentUser();
-    Get.log('<===== isRememberMe value in false if: '+_box.read('remember_checked').toString());
+    Get.log('Current user Storage(remember_checked) Deleted: '+_box.read('remember_checked').toString());
+  }else{
+    Get.log('Current user Storage(remember_checked): '+_box.read('remember_checked').toString());
+
   }
 
   Get.log('All services started...');
