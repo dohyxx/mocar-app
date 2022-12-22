@@ -3,6 +3,7 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:get/get.dart';
 import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 
 import '../providers/api_provider.dart';
 
@@ -21,9 +22,10 @@ class BaseRepository extends GetxService with ApiClient {
     httpClient.options.connectTimeout = 200000;     // 200s 서버로부터 응받을때까지의 시간
     httpClient.options.receiveTimeout = 200000;     // 200s 서버로 부터 응답을 스트리밍?으로 받는 중에 연결 지속 시간
 
-    // 헤더 정보에 k토큰값을 추가
-    if(Get.find<AuthController>().user.value.jwtToken != null || Get.find<AuthController>().user.value.jwtToken.isNotEmpty){
-      httpClient.options.headers['authorization'] = 'Bearer ${Get.find<AuthController>().user.value.jwtToken}';
+    // 헤더 정보에 토큰값을 추가
+    // if(Get.find<AuthController>().user.value.jwtToken != null || Get.find<AuthController>().user.value.jwtToken.isNotEmpty){
+    if(Get.find<AuthService>().user.value.auth == true){
+      httpClient.options.headers['authorization'] = 'Bearer ${Get.find<AuthService>().user.value.jwtToken}';
     }
   }
 
