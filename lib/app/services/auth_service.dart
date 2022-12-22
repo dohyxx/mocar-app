@@ -17,6 +17,7 @@ class AuthService extends GetxService {
     user.listen((User _user) {
       _box.write('current_user', _user.toJson());
     });
+    Get.log('[AuthService] 현재 유저 정보:  ${_box.read('current_user')}');
 
     await getCurrentUser();
     return this;

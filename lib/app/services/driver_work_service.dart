@@ -5,6 +5,7 @@ import 'package:mocar_test/app/repositories/alarm_repository.dart';
 import 'package:mocar_test/app/repositories/board_repository.dart';
 import 'package:mocar_test/app/repositories/cost_repository.dart';
 import 'package:mocar_test/app/repositories/delivery_repository.dart';
+import 'package:mocar_test/app/repositories/user_detail_repository.dart';
 import 'package:mocar_test/app/services/settings_service.dart';
 
 
@@ -52,6 +53,23 @@ class DriverWorkService extends GetxService {
     AlarmRepository _alarmRepository = AlarmRepository();
     return await _alarmRepository.getAlarmList();
   }
+
+  /**
+   * 내 차량 정보 조회
+   */
+  Future getVehicleInfo() async {
+    UserDetailRepository _userDetailRepository = UserDetailRepository();
+    return await _userDetailRepository.getVehicleInfo();
+  }
+
+  /**
+   * 내 업체 정보 조회
+   */
+  Future getEnterpriseInfo() async {
+    UserDetailRepository _userDetailRepository = UserDetailRepository();
+    return await _userDetailRepository.getEnterpriseInfo();
+  }
+
 
 
 }

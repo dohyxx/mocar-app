@@ -8,35 +8,30 @@ import 'package:mocar_test/app/common/ui.dart';
 import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/alarm/alarm.dart';
 import 'package:mocar_test/app/models/cost/cost.dart';
-import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
-import 'package:mocar_test/app/repositories/user_repository.dart';
-import 'package:mocar_test/app/services/auth_service.dart';
+import 'package:mocar_test/app/models/enterprise.dart';
+import 'package:mocar_test/app/models/vehicle_model.dart';
 import 'package:mocar_test/app/services/driver_work_service.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
 
 
 class RootController extends GetxController with GetSingleTickerProviderStateMixin {
 
   final isContentLoading = true.obs;
   ScrollController scrollController;
-  UserRepository _userRepository;
 
   GetStorage _box = new GetStorage();
 
 
-
-
-
   var monthCostList = <Cost>[].obs;     //월별정산 리스트
   var alarmList = <Alarm>[].obs;        //알림 리스트
+  var vehicle = Vehicle().obs;          //차량 정보
+  var enterprise = Enterprise().obs;    //업체 정보
   var monthTotalCost = 0.obs;           //월별 총 운임료
-  var delCnt = 0.obs;         //배송예약 건수
-  var costCnt = 0.obs;        //월별정산 건수
-  var alarmCnt = 0.obs;       //알림내역 갯수
-  var noticeCnt = 0.obs;      //전체공지 갯수
-  var photoCnt = 0.obs;       //완료사진 갯수
-  var routCnt = 0.obs;        //경로맵 갯수
+  var delCnt = 0.obs;                   //배송예약 건수
+  var costCnt = 0.obs;                  //월별정산 건수
+  var alarmCnt = 0.obs;                 //알림내역 갯수
+  var noticeCnt = 0.obs;                //전체공지 갯수
+  var photoCnt = 0.obs;                 //완료사진 갯수
+  var routCnt = 0.obs;                  //경로맵 갯수
 
   //메인 토글
   final toggleYn = 0.obs;
@@ -45,7 +40,6 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
 
   RootController(){
     scrollController = new ScrollController();
-    _userRepository = new UserRepository();
   }
 
 
@@ -67,10 +61,8 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
     //await getDeliveryCnt();
     //await getAlarmCnt();
     //await getAlarmList();
-
-    Util.print('AuthController 유저 정보:   ${Get.find<AuthController>().currentUser.value}');
-    Util.print('AuthService 유저 정보:   ${Get.find<AuthService>().user.value}');
-    Util.print('storage 유저 정보:   ${_box.read('current_user')}');
+    await getVehicleInfo();
+    await getEnterpriseInfo();
 
     isContentLoading.value = false;
   }
@@ -149,17 +141,21 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
     }
   }
 
-  // /**
-  //  * 내 정보 조회
-  //  */
-  // void getUserInfo() async {
-  //   try {
-  //     await _userRepository.getUserInfo();
-  //   }
-  //   catch(e) {
-  //     Util.print(e);
-  //   }
-  // }
+
+  /**
+   * 내 차량 정보 조회
+   */
+  void getVehicleInfo() async {
+    vehicle.value = await Get.find<DriverWorkService>().getVehicleInfo();
+  }
+
+  /**
+   * 내 업체 정보 조회
+   */
+  void getEnterpriseInfo() async {
+    enterprise.value = await Get.find<DriverWorkService>().getEnterpriseInfo();
+  }
+
 
 
 

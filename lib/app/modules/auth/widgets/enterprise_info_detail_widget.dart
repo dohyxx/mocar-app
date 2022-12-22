@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
+import 'package:mocar_test/app/modules/root/controllers/root_controller.dart';
 
 /**
  * 내 정보  - 2.기업 정보
  */
-class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
+class EnterpriseInfoDetailWidget extends GetWidget<RootController> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   EnterpriseInfoDetailWidget({
@@ -68,7 +69,7 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
                       fit: FlexFit.tight,
                       child: Obx(() =>
                           Text(
-                            Get.find<AuthController>().comp.value.compNm ?? '',
+                            '${controller.enterprise.value.compNm}',
                             style: TextStyle(
                               fontFamily: 'Noto Sans',
                               fontSize: 14,
@@ -113,7 +114,7 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
                       fit: FlexFit.tight,
                       child: Obx(() =>
                           Text(
-                            Get.find<AuthController>().comp.value.ownerNm ?? '',
+                            '${controller.enterprise.value.ownerNm}',
                             style: TextStyle(
                               fontFamily: 'Noto Sans',
                               fontSize: 14,
@@ -159,7 +160,7 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
                       fit: FlexFit.tight,
                       child: Obx(() =>
                           Text(
-                            Get.find<AuthController>().comp.value.bizNo ?? '',
+                            ' ${controller.enterprise.value.bizNo}',
                             style: TextStyle(
                               fontFamily: 'Noto Sans',
                               fontSize: 14,
@@ -177,93 +178,6 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
                 thickness: 1,
               ),
               // 사업자 또는 기관번호 종료
-
-
-              //업태 시작
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 12, bottom: 10),
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.max,
-              //     children: [
-              //       Flexible(
-              //         flex: 2,
-              //         fit: FlexFit.tight,
-              //         child: Text(
-              //           '업태',
-              //           style: TextStyle(
-              //             fontFamily: 'Noto Sans',
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.bold,
-              //             color: Color(0xdd191d21),
-              //           ),
-              //         ),
-              //       ),
-              //
-              //       Flexible(
-              //         flex: 3,
-              //         fit: FlexFit.tight,
-              //         child: Text(
-              //           '',
-              //           style: TextStyle(
-              //             fontFamily: 'Noto Sans',
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.w400,
-              //             color: Color(0xdd191d21),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              //
-              // Divider(
-              //   color: Color(0xffE1E6EB),
-              //   thickness: 1,
-              // ),
-              // 업태 종료
-
-
-              //종목 시작
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 12, bottom: 10),
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.max,
-              //     children: [
-              //       Flexible(
-              //         flex: 2,
-              //         fit: FlexFit.tight,
-              //         child: Text(
-              //           '종목',
-              //           style: TextStyle(
-              //             fontFamily: 'Noto Sans',
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.bold,
-              //             color: Color(0xdd191d21),
-              //           ),
-              //         ),
-              //       ),
-              //
-              //       Flexible(
-              //         flex: 3,
-              //         fit: FlexFit.tight,
-              //         child: Text(
-              //           '',
-              //           style: TextStyle(
-              //             fontFamily: 'Noto Sans',
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.w400,
-              //             color: Color(0xdd191d21),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // Divider(
-              //   color: Color(0xffE1E6EB),
-              //   thickness: 1,
-              // ),
-              // 종목 종료
 
 
               //사업장 소재지 시작
@@ -295,7 +209,7 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text: (Get.find<AuthController>().comp.value.zipCd ?? '') + ' ' + (Get.find<AuthController>().comp.value.addr ?? ''),
+                                  text: controller.enterprise.value.addr ?? '',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 14,
@@ -305,7 +219,7 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: ' ' + Get.find<AuthController>().comp.value.addrDetl ?? '',
+                                  text: controller.enterprise.value.addrDetail ?? '',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 14,
@@ -328,44 +242,6 @@ class EnterpriseInfoDetailWidget extends GetWidget<AuthController> {
               //   thickness: 1,
               // ),
               //사업장 소재지 종료
-
-              //회사 이메일 주소 시작
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 12, bottom: 10),
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.max,
-              //     children: [
-              //       Flexible(
-              //         flex: 2,
-              //         fit: FlexFit.tight,
-              //         child: Text(
-              //           '회사 이메일 주소',
-              //           style: TextStyle(
-              //             fontFamily: 'Noto Sans',
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.bold,
-              //             color: Color(0xdd191d21),
-              //           ),
-              //         ),
-              //       ),
-              //
-              //       Flexible(
-              //         flex: 3,
-              //         fit: FlexFit.tight,
-              //         child: Text(
-              //           '',
-              //           style: TextStyle(
-              //             fontFamily: 'Noto Sans',
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.w400,
-              //             color: Color(0xdd191d21),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // 회사 이메일 주소 종료
 
             ],
           ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
-import 'package:mocar_test/app/modules/auth/controllers/user_controller.dart';
 import 'package:mocar_test/app/modules/auth/widgets/enterprise_info_detail_widget.dart';
 import 'package:mocar_test/app/modules/auth/widgets/user_info_detail_widget.dart';
 import 'package:mocar_test/app/services/auth_service.dart';
 
 import '../../../routes/app_routes.dart';
 
-class UserInfoWidget extends GetView<UserController> {
+class UserInfoWidget extends GetView<AuthController> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -135,7 +134,7 @@ class UserInfoWidget extends GetView<UserController> {
                                               children: [
                                                 Obx(() =>
                                                     Text(
-                                                      Get.find<AuthController>().user.value.driverNm ?? '',
+                                                      controller.currentUser.value.driverNm ?? '',
                                                       overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                         color: Colors.black87,
@@ -150,7 +149,7 @@ class UserInfoWidget extends GetView<UserController> {
                                                       TextSpan(
                                                         children: [
                                                           TextSpan(
-                                                            text: Get.find<AuthController>().user.value.email ?? '',
+                                                            text: controller.currentUser.value.email ?? '',
                                                             style: TextStyle(
                                                               color: Colors.black87,
                                                               fontSize: 13,

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mocar_test/app/models/vehicle_model.dart';
 
 import '../models/user_model.dart';
 import '../providers/laravel_provider.dart';
@@ -18,27 +19,4 @@ class UserRepository {
 
 
 
-  /**
-   * 로그아웃 처리
-   */
-  Future<void> logout() async {
-    try {
-      _laravelApiClient = Get.find<LaravelApiClient>();
-      await _laravelApiClient.logout();
-    }
-    catch(e) {
-    }
-  }
-
-
-
-  /**
-   *  내 정보 조회
-   */
-  Future<void> getUserInfo() async{
-    _laravelApiClient = Get.find<LaravelApiClient>();
-    await _laravelApiClient.getUserInfo();
-    await _laravelApiClient.getUserVehicle();
-    await _laravelApiClient.getUserComp();
-  }
 }

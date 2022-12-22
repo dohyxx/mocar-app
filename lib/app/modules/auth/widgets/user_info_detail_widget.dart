@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/models/enum.dart';
 import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
+import 'package:mocar_test/app/modules/root/controllers/root_controller.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 
 /**
  * 내 정보  - 1.회원(차주) 정보
  */
-class UserInfoDetailWidget extends GetWidget<AuthController> {
+class UserInfoDetailWidget extends GetWidget<RootController> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _user = Get.find<AuthController>().currentUser;
 
   UserInfoDetailWidget({
     Key key,
@@ -67,7 +70,7 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
                     fit: FlexFit.tight,
                     child: Obx(() =>
                         Text(
-                          Get.find<AuthController>().user.value.email ?? '',
+                          _user.value.email ?? '',
                           style: TextStyle(
                             fontFamily: 'Noto Sans',
                             fontSize: 14,
@@ -157,7 +160,7 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
                     fit: FlexFit.tight,
                     child: Obx(() =>
                         Text(
-                          Get.find<AuthController>().user.value.driverNm ?? '',
+                          _user.value.driverNm ?? '',
                           style: TextStyle(
                             fontFamily: 'Noto Sans',
                             fontSize: 14,
@@ -202,7 +205,7 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
                     fit: FlexFit.tight,
                     child: Obx(() =>
                         Text(
-                          Get.find<AuthController>().user.value.phoneNumber ?? '',
+                          _user.value.phoneNumber ?? '',
                           style: TextStyle(
                             fontFamily: 'Noto Sans',
                             fontSize: 14,
@@ -247,7 +250,7 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
                     fit: FlexFit.tight,
                     child: Obx(() =>
                         Text(
-                          Get.find<AuthController>().user.value.email ?? '',
+                          _user.value.email ?? '',
                           style: TextStyle(
                             fontFamily: 'Noto Sans',
                             fontSize: 14,
@@ -293,7 +296,7 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
                       children: [
                         Obx(() =>
                             Text(
-                              Get.find<AuthController>().vehicle.value.vehicleNo ?? '',
+                              Get.find<RootController>().vehicle.value.vehicleNo ?? '',
                               style: TextStyle(
                                 fontFamily: 'Noto Sans',
                                 fontSize: 14,
@@ -311,7 +314,7 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
                           ),
                         ),
                         Text(
-                          '${VehicleType.values.byName('TYPE_${Get.find<AuthController>().vehicle.value.vehicleTypeCd}').codeName}',
+                          ' ${VehicleType.values.byName('TYPE_${Get.find<RootController>().vehicle.value.vehicleTypeCd}').codeName}',
                           style: TextStyle(
                             fontFamily: 'Noto Sans',
                             fontSize: 14,
@@ -330,6 +333,5 @@ class UserInfoDetailWidget extends GetWidget<AuthController> {
         ),
       ),
     );
-
   }
 }

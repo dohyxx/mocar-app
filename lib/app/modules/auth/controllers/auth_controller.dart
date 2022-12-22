@@ -6,9 +6,8 @@ import 'package:mocar_test/app/models/user_model.dart';
 import 'package:mocar_test/app/repositories/user_repository.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
 import 'package:mocar_test/app/services/auth_service.dart';
-import '../../../models/comp_model.dart';
+import '../../../models/enterprise.dart';
 import '../../../models/vehicle_model.dart';
-
 
 
 class AuthController extends GetxController with GetSingleTickerProviderStateMixin {
@@ -21,7 +20,7 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
   //로그인
   final user = User().obs;
   final vehicle = Vehicle().obs;
-  final comp = Comp().obs;
+  final enterprise = Enterprise().obs;
   UserRepository _userRepository;
 
   final menuList = ['배송예약', '경로맵', '월별정산', '완료사진', '알림내역', '전체공지'].obs;

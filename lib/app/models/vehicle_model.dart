@@ -1,22 +1,22 @@
 import 'parents/model.dart';
 
 class Vehicle extends Model {
-  int vehicleId;
-  int shipCompId;
-  int shipDriverId;
-  int vehicleTypeCd;
-  String vehicleNo;
-  String vehicleLicenseUrl;
-  String directMgmtYn;
-  String vehicleOwnerCd;
-  String dropLocId;
-  String useYn;
-  String gisLat;
-  String gisLon;
-  String createdAt;
-  int createdUser;
-  String updatedAt;
-  int updatedUser;
+  int vehicleId;                //차량 일련번호
+  int shipCompId;               //배송 업체 일련번호
+  int shipDriverId;             //배송 기사 일련번호
+  int vehicleTypeCd;            //차량 유형 코드
+  String vehicleNo;             //차량 번호
+  String vehicleLicenseUrl;     //차량등록증 이미지 URL
+  String directMgmtYn;          //직영 차량 여부
+  String vehicleOwnerCd;        //차량 소유 코드
+  String dropLocId;             //출발 하차지 아이디
+  String useYn;                 //운행 가능 여부
+  String gisLat;                //위도
+  String gisLon;                //경도
+  String createdAt;             //등록일시
+  int createdUser;              //등록자
+  String updatedAt;             //수정일시
+  int updatedUser;              //수정자
 
   Vehicle({this.vehicleId, this.shipCompId, this.shipDriverId, this.vehicleTypeCd, this.vehicleNo, this.vehicleLicenseUrl, this.directMgmtYn,
     this.vehicleOwnerCd, this.dropLocId, this.useYn, this.gisLat, this.gisLon, this.createdAt,

@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:mocar_test/app/common/ui.dart';
 import 'package:mocar_test/app/models/delivery/delivery.dart';
-import 'package:mocar_test/app/models/delivery/delivery_detail.dart';
 import 'package:mocar_test/app/repositories/base_repository.dart';
 
 
