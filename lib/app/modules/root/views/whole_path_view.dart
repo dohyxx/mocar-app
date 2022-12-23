@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/flutter_flow/flutter_flow_util.dart';
-import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
 import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/modules/delivery/widgets/delivery_card_widget.dart';
 import 'package:mocar_test/app/modules/global_widgets/circular_loading_widget.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 import 'package:mocar_test/app/services/settings_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -50,7 +50,9 @@ class WholePathView extends GetView<DeliveryController> {
                             debuggingEnabled: true,
                             onWebViewCreated: (_con) {
                               controller.webView = _con;
-                              Map<String, String> headers = {"authorization": 'Bearer ${Get.find<AuthController>().user.value.jwtToken}'};
+                              Map<String, String> headers = {"authorization": 'Bearer ${Get.find<AuthService>().user.value.jwtToken}'};
+
+                              //TODO:: '오늘' 배송예약이 있을 경우에만 경로맵 표출?
                               controller.webView.loadUrl(Get.find<SettingsService>().routeMap + '${controller.deliveryList.first.delSn}', headers: headers);
 
                             },
@@ -464,3 +466,6 @@ class WholePathView extends GetView<DeliveryController> {
       //하단 버튼 종료
   }
 }
+
+
+
