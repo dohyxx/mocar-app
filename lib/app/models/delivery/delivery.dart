@@ -17,6 +17,8 @@ class Delivery extends Model {
   int totalAmount;          //전체 운송요금
   var deliveryDetail = <DeliveryDetail>[]; //배송 상세 내역
 
+  int routeCnt;             //총 경유지 수
+
 
   Delivery({this.delSn, this.pickUpDate, this.totalPaltQuantity, this.totalDistance, this.vehicleRtTotalCount, this.shipCompleteYn,
       this.dispatchStatus, this.shipAmount, this.plusAmount, this.minusAmount, this.totalAmount, this.deliveryDetail});
