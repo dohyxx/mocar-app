@@ -72,7 +72,7 @@ class ConveyancePhotoRepository extends BaseRepository {
       };
 
       //라우트 경로 지정
-      Uri _uri = getApiBaseUri("dispatch-route-list").replace(queryParameters: _queryParameters);;
+      Uri _uri = getApiBaseUri("dispatch-route-list").replace(queryParameters: _queryParameters);
       Get.log('<==== _uri : ' +_uri.toString());
 
       var response = await httpClient.getUri(_uri, options: optionsCache);

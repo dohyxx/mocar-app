@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/delivery/delivery.dart';
 import 'package:mocar_test/app/repositories/base_repository.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 
 
 class DeliveryRepository extends BaseRepository {
@@ -12,11 +14,16 @@ class DeliveryRepository extends BaseRepository {
    */
   Future<Map<String, dynamic>> getDeliveryList() async{
     try{
+      var _queryParameters = {
+        'vehicle_id' : Get.find<AuthService>().user.value.vehicleSn.toString(),
+      };
+
       //라우트 경로 지정
-      Uri _uri = getApiBaseUri("dispatch-order-list");
+      Uri _uri = getApiBaseUri("dispatch-order-list").replace(queryParameters: _queryParameters);
       Get.log('<==== _uri : ' +_uri.toString());
 
       var response = await httpClient.getUri(_uri, options: optionsCache);
+      Util.print('배송예약 목록 조회: ${response}');
 
 
       if (response.data['resultCode'] == 200) {

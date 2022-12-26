@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/common/ui.dart';
+import 'package:mocar_test/app/flutter_flow/flutter_flow_widgets.dart';
 import 'package:mocar_test/app/modules/auth/controllers/auth_controller.dart';
 
 
@@ -19,14 +20,14 @@ class MocarLoginView extends GetView<AuthController> {
     return Scaffold(
       //key: _loginFormKey,
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        key: scaffoldKey,
-        child: Center(
-          child: Form(
-            key: _loginFormKey,
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
+      // resizeToAvoidBottomInset: false,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SafeArea(
+          key: scaffoldKey,
+          child: Center(
+            child: Form(
+              key: _loginFormKey,
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -149,6 +150,7 @@ class MocarLoginView extends GetView<AuthController> {
                                       ),
                                       keyboardType: TextInputType.text,
                                       textInputAction: TextInputAction.done,
+                                      //onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                                       validator: (input) {
                                         if (input == null ||
                                             input.trim().isEmpty) {
@@ -200,8 +202,9 @@ class MocarLoginView extends GetView<AuthController> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
-                                      keyboardType: TextInputType.number,
+                                      //keyboardType: TextInputType.number,
                                       textInputAction: TextInputAction.done,
+                                      // onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                                       validator: (input) {
                                         if (input == null ||
                                             input.trim().isEmpty) {
@@ -244,8 +247,8 @@ class MocarLoginView extends GetView<AuthController> {
                                             fontFamily: 'NotoSansKR',
                                         ),
                                       ),
-                                      // readOnly: controller.conveyanceDetail.value.wtCnfirmYn,
                                       readOnly: false,
+                                      // autofocus: true,
                                       obscureText: true,
                                       style: const TextStyle(
                                         color: Colors.black,
@@ -305,13 +308,7 @@ class MocarLoginView extends GetView<AuthController> {
 
                       SizedBox(height: 25),
 
-
-                      //로그인 버튼 시작
-                      MaterialButton(
-                        minWidth: 325,
-                        height: 60,
-                        color: Color(0xff98CECB),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                      FFButtonWidget(
                         onPressed: () async{
                           if(_loginFormKey.currentState.validate()) {
                             _loginFormKey.currentState.save();
@@ -322,20 +319,57 @@ class MocarLoginView extends GetView<AuthController> {
                           }
 
                         },
-                        child: const Text(
-                          '로그인',
-                          style: TextStyle(
+                        text: '로그인',
+                        options: FFButtonOptions(
+                          height: 60,
+                          width: 325,
+                          color: Color(0xff98CECB),
+                          textStyle: TextStyle(
                               color: Colors.white,
                               fontFamily: 'NotoSansKR',
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal
                           ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+
+                          borderRadius: 8.0,
                         ),
                       ),
-                      //로그인 버튼 종료
 
-                      SizedBox(height: 150),
+                      // //로그인 버튼 시작
+                      // MaterialButton(
+                      //   minWidth: 325,
+                      //   height: 60,
+                      //   color: Color(0xff98CECB),
+                      //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                      //   onPressed: () async{
+                      //     if(_loginFormKey.currentState.validate()) {
+                      //       _loginFormKey.currentState.save();
+                      //       controller.isContentLoading.value = false;
+                      //       Get.log('<======== Login button Click....');
+                      //
+                      //       controller.login();
+                      //     }
+                      //
+                      //   },
+                      //   child: const Text(
+                      //     '로그인',
+                      //     style: TextStyle(
+                      //         color: Colors.white,
+                      //         fontFamily: 'NotoSansKR',
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.w500,
+                      //         fontStyle: FontStyle.normal
+                      //     ),
+                      //   ),
+                      // ),
+                      // //로그인 버튼 종료
+
+                      SizedBox(height: 200),
                     ],
                   ),
                 ),
@@ -347,3 +381,4 @@ class MocarLoginView extends GetView<AuthController> {
     );
   }
 }
+

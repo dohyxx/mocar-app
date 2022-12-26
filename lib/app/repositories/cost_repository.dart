@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:mocar_test/app/common/ui.dart';
+import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/cost/cost.dart';
 import 'package:mocar_test/app/repositories/base_repository.dart';
+import 'package:mocar_test/app/services/auth_service.dart';
 
 
 class CostRepository extends BaseRepository{
@@ -16,14 +18,15 @@ class CostRepository extends BaseRepository{
      try{
        var _queryParameters = {
          'month' : selectedMonth.toString(),
+         'vehicle_id' : Get.find<AuthService>().user.value.vehicleSn.toString(),
        };
 
-       //라우트 경로 지정
-      Uri _uri = getApiBaseUri("dispatch-paid").replace(queryParameters: _queryParameters);;
+      Uri _uri = getApiBaseUri("dispatch-paid").replace(queryParameters: _queryParameters);
       Get.log('<==== _uri : ' +_uri.toString());
 
-      //API 호출
       var response = await httpClient.getUri(_uri, options: optionsCache);
+      Util.print('월별정산 목록 조회: ${response}');
+
 
       if (response.data['resultCode'] == 200) {
 
@@ -36,7 +39,7 @@ class CostRepository extends BaseRepository{
         return response.data['resultCode'];
       }
     }catch (e) {
-       Get.showSnackbar(Ui.ErrorSnackBar(message: e.message));
+       Util.print(e);
     }
   }
 }

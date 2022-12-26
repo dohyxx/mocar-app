@@ -144,6 +144,9 @@ class UserInfoWidget extends GetView<AuthController> {
                                                         fontStyle: FontStyle.normal,
                                                       ),
                                                     )),
+
+                                                SizedBox(height: 5),
+
                                                 Obx(() =>
                                                     Text.rich(
                                                       TextSpan(
@@ -175,8 +178,8 @@ class UserInfoWidget extends GetView<AuthController> {
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
                                           MaterialButton(
-                                            height: 24,
-                                            minWidth: 10,
+                                            height: 28,
+                                            minWidth: 80,
                                             color: Color(0xffF5F7FA),
                                             elevation: 0,
                                             onPressed: () async {
@@ -189,7 +192,7 @@ class UserInfoWidget extends GetView<AuthController> {
                                             shape: RoundedRectangleBorder(
                                                 side: BorderSide(
                                                   color: Color(0xffE1E6EB),
-                                                  width: 1,
+                                                  width: 1.5,
                                                 ),
                                                 borderRadius: BorderRadius.circular(5)),
                                             child: Text(
@@ -208,7 +211,7 @@ class UserInfoWidget extends GetView<AuthController> {
                                     SizedBox(width: 10),
                                   ],
                                 ),
-                                SizedBox(height: 30),
+                                SizedBox(height: 20),
 
                                 //1.회원(차주) 정보 위젯 시작
                                 UserInfoDetailWidget(),

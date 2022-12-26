@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mocar_test/app/common/util.dart';
 import 'package:mocar_test/app/models/delivery/delivery.dart';
 import 'package:mocar_test/app/models/enum.dart';
 import 'package:mocar_test/app/repositories/delivery_repository.dart';
@@ -21,7 +22,7 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
   DeliveryRepository deliveryRepository;
   var deliveryList = <Delivery>[].obs;
   var delTotalCnt = 0.obs;                //총 배송예약 건수
-  var delTotalCost = 0.obs;
+  var delTotalCost = 0.obs;               //총 금액
 
   var deliveryId = 0.obs; //맵 경로 ID
 
@@ -76,12 +77,15 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
       });
 
       for(var i=0; i<deliveryList.length; i++){
+        var routeCnt = 0.obs;
         for(var j=0; j<deliveryList[i].deliveryDetail.length; j++){
           if(deliveryList[i].deliveryDetail[j].nodeTypeCd.codeKey == 'S'){
-            //Util.print('## deliveryList[${i}].deliveryDetail[${j}].nodeTypeCd.codeKey: ${deliveryList[i].deliveryDetail[j].nodeTypeCd.codeKey}');
-            //Util.print('## deliveryList[${i}].deliveryDetail.removeAt(${j}): ${j}');
             deliveryList[i].deliveryDetail.removeAt(j);
-
+          }
+          if(deliveryList[i].deliveryDetail[j].nodeTypeCd.codeKey == 'P'){
+            routeCnt.value++;
+            deliveryList[i].routeCnt = routeCnt.value;
+            Util.print('경유지 수: ${deliveryList[i].routeCnt.toString()}');
           }
         }
       }

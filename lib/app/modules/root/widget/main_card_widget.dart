@@ -118,8 +118,8 @@ class MainCardWidget extends GetWidget<RootController> {
                                           style: TextStyle(
                                             color: Colors.black87,
                                             fontFamily: 'NotoSansKR',
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12.5,
+                                            fontWeight: FontWeight.w600,
                                             fontStyle: FontStyle.normal,
                                           ),
                                         ),
@@ -136,6 +136,7 @@ class MainCardWidget extends GetWidget<RootController> {
                                         ),
                                       ],
                                     ),
+                                    SizedBox(height: 5),
 
                                     Text.rich(
                                       TextSpan(
@@ -146,7 +147,7 @@ class MainCardWidget extends GetWidget<RootController> {
                                               color: Colors.black87,
                                               fontSize: 12,
                                               fontFamily: 'NotoSansKR',
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w400,
                                               fontStyle: FontStyle.normal,
                                             ),
                                           ),

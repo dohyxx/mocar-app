@@ -2,7 +2,6 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/common/util.dart';
-import 'package:mocar_test/app/flutter_flow/flutter_flow_util.dart';
 import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/modules/delivery/widgets/delivery_list_row_widget.dart';
 import 'package:mocar_test/app/services/settings_service.dart';
@@ -132,7 +131,7 @@ class DeliveryListWidget extends GetWidget<DeliveryController> {
                                                     child: Padding(
                                                       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                                                       child: Text(
-                                                        '경유 ${controller.deliveryList[index].vehicleRtTotalCount}',
+                                                        '경유 ${controller.deliveryList[index].routeCnt}',
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 12,

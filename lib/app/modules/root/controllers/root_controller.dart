@@ -10,6 +10,7 @@ import 'package:mocar_test/app/models/alarm/alarm.dart';
 import 'package:mocar_test/app/models/cost/cost.dart';
 import 'package:mocar_test/app/models/enterprise.dart';
 import 'package:mocar_test/app/models/vehicle_model.dart';
+import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/services/driver_work_service.dart';
 
 
@@ -45,8 +46,9 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
 
   @override
   void onInit() {
-    //loginFormKey = new GlobalKey<FormState>();
     super.onInit();
+
+    Get.put(DeliveryController());
     onRefresh();
   }
 
@@ -56,11 +58,10 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
    */
   void onRefresh() async {
     isContentLoading.value = true;
-    //await getMonthCost();
-    //await getNoticeCnt();
-    //await getDeliveryCnt();
-    //await getAlarmCnt();
-    //await getAlarmList();
+    await getMonthCost();
+    await getNoticeCnt();
+    await getDeliveryCnt();
+    await getAlarmList();
     await getVehicleInfo();
     await getEnterpriseInfo();
 
@@ -133,8 +134,7 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
 
       Map<String, dynamic> data = await Get.find<DriverWorkService>().getAlarmList();
       alarmList.addAll(data['alarmList']);
-
-      Get.log('<===== 메인 알림내역 조회 : ' + alarmList.toString());
+      alarmCnt.value = data['alarmCnt'];
 
     } catch (e) {
         Util.print(e);

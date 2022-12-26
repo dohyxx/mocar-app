@@ -66,7 +66,6 @@ class DeliveryListRowWidget extends GetWidget<DeliveryController> {
 
                     SizedBox(width: 30),
 
-                    //TODO: 확정 or 취소 분기 처리 필요
                     Obx(
                       () => Container(
                         decoration: BoxDecoration(
@@ -79,7 +78,7 @@ class DeliveryListRowWidget extends GetWidget<DeliveryController> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
                           child: Text(
-                            controller.deliveryList[index].dispatchStatus == "O" ? '확정' : '취소',
+                            controller.deliveryList[firstIndex].dispatchStatus == "O" ? '확정' : '취소',
                             style: TextStyle(
                               fontFamily: 'Noto Sans',
                               fontSize: 12,
@@ -96,24 +95,24 @@ class DeliveryListRowWidget extends GetWidget<DeliveryController> {
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   child: Row(
                     children: [
-                      // Text(
-                      //   'ABCDE00005014654',
-                      //   style: TextStyle(
-                      //     fontFamily: 'Noto Sans',
-                      //     fontSize: 13,
-                      //     color: Colors.black,
-                      //     fontWeight: FontWeight.w500,
-                      //   ),
-                      // ),
-                      // Text(
-                      //   ' | ',
-                      //   style: TextStyle(
-                      //     fontFamily: 'Noto Sans',
-                      //     fontSize: 13,
-                      //     color: Color(0xff333D4B),
-                      //     fontWeight: FontWeight.w500,
-                      //   ),
-                      // ),
+                      Text(
+                        '${controller.deliveryList[firstIndex].deliveryDetail[index].orderNo}',
+                        style: TextStyle(
+                          fontFamily: 'Noto Sans',
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        ' | ',
+                        style: TextStyle(
+                          fontFamily: 'Noto Sans',
+                          fontSize: 13,
+                          color: Color(0xff333D4B),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       Text(
                         '파레트 KPP / ${controller.deliveryList[firstIndex].deliveryDetail[index].pltQty}개',
                         style: TextStyle(
