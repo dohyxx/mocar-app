@@ -32,7 +32,7 @@ class DeliveryDetail extends Model {
 
   DeliveryDetail.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
-    routeId = intFromJson(json, 'id');
+    routeId = intFromJson(json, 'node_id');
     pltQty = intFromJson(json, 'plt_qty');
     pickLocationId = intFromJson(json, 'pickup_loc_id');
     dropLocationId = intFromJson(json, 'drop_loc_id');
@@ -54,7 +54,7 @@ class DeliveryDetail extends Model {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['pickup_loc_id'] = this.pickLocationId;
     data['plt_qty'] = this.pltQty;
-    data['id'] = this.routeId;
+    data['node_id'] = this.routeId;
     data['drop_loc_id'] = this.dropLocationId;
     data['node_seq'] = this.nodeSeq;
     data['node_type_cd'] = this.nodeTypeCd != null ? NodeTypeCd.values.firstWhere((element) => element == this.nodeTypeCd).codeKey : null;
