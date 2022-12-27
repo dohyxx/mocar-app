@@ -95,13 +95,17 @@ class DeliveryListRowWidget extends GetWidget<DeliveryController> {
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   child: Row(
                     children: [
-                      Text(
-                        '${controller.deliveryList[firstIndex].deliveryDetail[index].orderNo}',
-                        style: TextStyle(
-                          fontFamily: 'Noto Sans',
-                          fontSize: 13,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
+                      Obx(()=>
+                        Text(
+                          controller.deliveryList[firstIndex].deliveryDetail[index].orderNo.isNotEmpty
+                          ? '${controller.deliveryList[firstIndex].deliveryDetail[index].orderNo}'
+                          : '  -  ',
+                          style: TextStyle(
+                            fontFamily: 'Noto Sans',
+                            fontSize: 13,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                       Text(

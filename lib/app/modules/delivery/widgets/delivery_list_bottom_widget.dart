@@ -10,16 +10,13 @@ import 'package:mocar_test/app/models/enum.dart';
 
 class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
   int index;
-  DeliveryDetail deliveryDetail;
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   DeliveryListBottomWidget({Key key, this.index,
-    this.deliveryDetail,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.log('<=============------- -${deliveryDetail.toString()}');
     return Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -62,7 +59,7 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                               SizedBox(width: 2),
 
                                               Text(
-                                                '${deliveryDetail.nodeTypeCd.codeName}',
+                                                '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName}',
                                                 style: TextStyle(
                                                   fontFamily: 'Noto Sans',
                                                   fontSize: 12,
@@ -128,7 +125,7 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                                               child: Text(
-                                                '${deliveryDetail.roadAddress}',
+                                                '${controller.deliveryDay.deliveryDetail[index].roadAddress}',
                                                 style: TextStyle(
                                                   color: Color(0xff333D4B),
                                                   fontSize: 14,
@@ -174,9 +171,7 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                                               child: Text(
-                                                deliveryDetail.roadAddrDetail != null && deliveryDetail.roadAddrDetail.isNotEmpty
-                                                ? '${deliveryDetail.roadAddrDetail}'
-                                                : '-',
+                                                '${controller.deliveryDay.deliveryDetail[index].roadAddrDetail}',
                                                 style: TextStyle(
                                                   color: Color(0xff333D4B),
                                                   fontSize: 14,

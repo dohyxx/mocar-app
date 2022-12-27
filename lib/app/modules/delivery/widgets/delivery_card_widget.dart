@@ -141,9 +141,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                           children: [
                                             TextSpan(
                                               text:
-                                            controller.deliveryList.length > 0
-                                            ? '${controller.deliveryList[0].deliveryDetail[0].roadAddress}'
-                                            : '-',
+                                              '${controller.deliveryDay.deliveryDetail[0].roadAddress}',
                                               style: TextStyle(
                                                 color: Color(0xffFFFFFF),
                                                 fontSize: 14,
@@ -176,9 +174,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                           children: [
                                             TextSpan(
                                               text:
-                                              controller.deliveryList.length > 0
-                                                ? '${controller.deliveryList[0].deliveryDetail[1].roadAddress}'
-                                                : '-',
+                                              '${controller.deliveryDay.deliveryDetail[1].roadAddress}',
                                               style: TextStyle(
                                                 color: Color(0xffFFFFFF),
                                                 fontSize: 14,
@@ -216,9 +212,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 16, vertical: 5),
                                             child: Text(
-                                              controller.deliveryList.length != null && controller.deliveryList.length != 0
-                                                  ? '총 ${controller.deliveryList[0].totalDistance}km'
-                                                  : '총 0km',
+                                              '총 ${controller.deliveryDay.totalDistance}km',
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 12,
@@ -244,9 +238,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 0, vertical: 5),
                                             child: Text(
-                                              controller.deliveryList.length != null && controller.deliveryList.length != 0
-                                                  ? '경유 ${controller.deliveryList[0].vehicleRtTotalCount}'
-                                                  : '경유 0',
+                                              '경유 ${controller.deliveryDay.routeCnt}',
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 12,
@@ -278,9 +270,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                                 'assets/icon/icon_3.png',
                                               ),
                                               Text(
-                                                controller.deliveryList.length > 0
-                                                    ? '${controller.deliveryList[0].deliveryDetail[1].nodeName}'
-                                                    : '배송 없음',
+                                                '${controller.deliveryDay.deliveryDetail[1].nodeName}',
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 12,
@@ -313,7 +303,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                 controller: controller.scrollController,
                                 itemCount: controller.deliveryList[0].deliveryDetail.length,
                                 itemBuilder: (context, index) {
-                                  return DeliveryListBottomWidget(index: index, deliveryDetail: controller.deliveryList[0].deliveryDetail[index]);
+                                  return DeliveryListBottomWidget(index: index);
                             });
                           } else {
                             return EmptyRowWidget();

@@ -169,7 +169,9 @@ class DeliveryStatView extends GetView<DeliveryController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${Util.dateForm(Get.find<SettingsService>().today, type: 1)} ~${DateFormat('dd').format(Get.find<SettingsService>().today.add(const Duration(days: 7)))}',
+                                  // '${Util.dateForm(Get.find<SettingsService>().today, type: 1)} ~${DateFormat('dd').format(Get.find<SettingsService>().today.add(const Duration(days: 7)))}',
+                                  '${Util.dateForm(DateTime(Get.find<SettingsService>().today.year, Get.find<SettingsService>().today.month, 1), type: 1)}'
+                                      '~${Util.dateForm(DateTime(Get.find<SettingsService>().today.year, Get.find<SettingsService>().today.month+1, 0), type: 2).substring(8)}',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 16,
@@ -237,7 +239,8 @@ class DeliveryStatView extends GetView<DeliveryController> {
       ),
 
     bottomNavigationBar:
-        Row(
+      controller.deliveryDay != null && controller.deliveryDay.delSn != null
+      ? Row(
           mainAxisSize: MainAxisSize.max,
           children: [
           Expanded(
@@ -353,14 +356,11 @@ class DeliveryStatView extends GetView<DeliveryController> {
 
                             SizedBox(width: 5),
 
-                            Obx(() =>
                             Text.rich(
                               TextSpan(
                                 children: [
                                   TextSpan(text:
-                                  controller.deliveryList.length > 0
-                                      ? '${controller.deliveryList[0].deliveryDetail[0].roadAddress}'
-                                      : '-',
+                                      '${controller.deliveryDay.deliveryDetail[0].roadAddress}',
                                     style: TextStyle(
                                       color: Color(0xffFFFFFF),
                                       fontSize: 14,
@@ -369,7 +369,6 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                       FontWeight.w500,
                                     ),
                                   ),
-
                                 ],
                               ),
                               style: TextStyle(
@@ -378,7 +377,6 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                 fontFamily: 'NotoSansKR',
                                 fontWeight: FontWeight.w500,
                               ),
-                            ),
                             ),
                           ],
                         ),
@@ -394,15 +392,12 @@ class DeliveryStatView extends GetView<DeliveryController> {
                               Image.asset('assets/icon/down-s.png'),
 
                               SizedBox(width: 5),
-                          Obx(() =>
                               Text.rich(
                                 TextSpan(
                                   children: [
                                     TextSpan(
                                       text:
-                                      controller.deliveryList.length > 0
-                                        ? '${controller.deliveryList[0].deliveryDetail[1].roadAddress}'
-                                        : '-',
+                                        '${controller.deliveryDay.deliveryDetail[1].roadAddress}',
                                       style: TextStyle(
                                         color: Color(0xffFFFFFF),
                                         fontSize: 14,
@@ -420,7 +415,6 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                   fontFamily: 'NotoSansKR',
                                   fontWeight: FontWeight.w500,
                                 ),
-                              ),
                               ),
                             ],
                           ),
@@ -441,18 +435,14 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                                   child:
-                                  Obx(()=>
                                   Text(
-                                    controller.deliveryList.length != null && controller.deliveryList.length != 0
-                                    ? '총 ${controller.deliveryList[0].totalDistance}km'
-                                    : '총 0km',
+                                    '총 ${controller.deliveryDay.totalDistance}km',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
                                       fontFamily: 'NotoSansKR',
                                       fontWeight: FontWeight.w500,
                                     ),
-                                  ),
                                   ),
                                 ),
                               ),
@@ -473,18 +463,14 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                   child:
-                                  Obx(()=>
                                   Text(
-                                    controller.deliveryList.length != null && controller.deliveryList.length != 0
-                                    ? '경유 ${controller.deliveryList[0].vehicleRtTotalCount}'
-                                    : '경유 0',
+                                    '경유 ${controller.deliveryDay.routeCnt}',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
                                       fontFamily: 'NotoSansKR',
                                       fontWeight: FontWeight.w500,
                                     ),
-                                  ),
                                   ),
                                 ),
                               ),
@@ -509,18 +495,14 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                       'assets/icon/icon_3.png',
                                     ),
 
-                                    Obx(()=>
                                     Text(
-                                      controller.deliveryList.length > 0
-                                      ? '${controller.deliveryList[0].deliveryDetail[1].nodeName}'
-                                      : '배송 없음',
+                                      '${controller.deliveryDay.deliveryDetail[1].nodeName}',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 12,
                                         fontFamily: 'NotoSansKR',
                                         fontWeight: FontWeight.w500,
                                       ),
-                                    ),
                                     ),
                                   ],
                                 ),
@@ -535,7 +517,8 @@ class DeliveryStatView extends GetView<DeliveryController> {
               ),
             ),
          ],
-       ),
+       )
+          : SizedBox(),
     );
   }
 }
