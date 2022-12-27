@@ -6,7 +6,6 @@ import 'package:mocar_test/app/modules/conveyance/widgets/completed_photo_list_w
 import 'package:mocar_test/app/modules/global_widgets/circular_loading_widget.dart';
 import 'package:mocar_test/app/modules/global_widgets/empty_row.dart';
 import 'package:mocar_test/app/modules/global_widgets/sub_app_bar_widget.dart';
-import 'package:mocar_test/app/routes/app_routes.dart';
 
 class CompletedPhotoView extends GetView<ConveyancePhotoController> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -64,20 +63,19 @@ class CompletedPhotoView extends GetView<ConveyancePhotoController> {
                   SizedBox(height: 16),
 
                   //완료사진 리스트 위젯 시작
-
                   Obx((){
                     if (controller.isContentLoading.isTrue){
                       return Center(
                           heightFactor: 5,
                           child: new CircularLoadingWidget(height: 90));
                     }
-                    else if(controller.deliveryDetail.length > 0){
+                    else if(controller.deliveryDay.deliveryDetail.length > 0){
                       return ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           controller: controller.scrollController,
-                          itemCount: controller.deliveryDetail.length,
+                          itemCount: controller.deliveryDay.deliveryDetail.length,
                           itemBuilder: (context, index) {
                             return CompletedPhotoListWidget(index: index);
                           });

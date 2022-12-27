@@ -53,8 +53,6 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
    */
   void onRefresh() async {
     isContentLoading.value = true;
-
-    deliveryDay = new Delivery();
     await getDeliveryList();
 
     Future.delayed(Duration(milliseconds: 600)) .then((onValue)
@@ -68,6 +66,7 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
   void getDeliveryList() async {
     try {
       deliveryList.clear();
+      deliveryDay = new Delivery();
       delTotalCnt.value = 0;
       delTotalCost.value = 0;
 
@@ -98,15 +97,11 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
         if(deliveryList[i].pickUpDate == Util.dateForm(Get.find<SettingsService>().today, type: 2)){
           deliveryDay = deliveryList[i];
           Util.print('오늘 배송예약 in Controller : ' + deliveryDay.toString());
-          Util.print('오늘 배송예약 in Controller : ' + deliveryDay.deliveryDetail.toString());
         }
       }
-      Util.print('배송예약 목록 조회 in Controller : ' + deliveryList.toString());
-      Util.print('배송예약 목록 조회 in Controller : ' + deliveryDay.toString());
 
     } catch (e) {
-    } catch (e) {
-      Get.log(e.toString());
+      Util.print(e);
     }
   }
 

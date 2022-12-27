@@ -3,16 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mocar_test/app/common/ui.dart';
 import 'package:mocar_test/app/common/util.dart';
-import 'package:mocar_test/app/models/delivery/delivery_detail.dart';
-import 'package:mocar_test/app/models/enum.dart';
+import 'package:mocar_test/app/models/delivery/delivery.dart';
+import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/repositories/conveyance_photo_repository.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
-import 'package:mocar_test/app/services/driver_work_service.dart';
-
-
-
 
 class ConveyancePhotoController extends GetxController with GetSingleTickerProviderStateMixin {
 
@@ -25,14 +20,12 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
 
 
   //완료사진
-  var photoList1 = <File>[].obs; //상차지1
-  var photoList2 = <File>[].obs; //상차지2
-  var photoList3 = <File>[].obs; //하차지
+
+
   var vehicleRouteId;
 
   var completedPhotoUrl = <String>[].obs;
-  var deliveryDetail = <DeliveryDetail>[].obs;
-
+  Delivery deliveryDay;
 
   ConveyancePhotoController(){
     scrollController = new ScrollController();
@@ -51,7 +44,10 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
   void onRefresh() async {
     isContentLoading.value = true;
 
-    getDispatchRouteList();
+    // getDispatchRouteList();
+    deliveryDay = Get.find<DeliveryController>().deliveryDay;
+    Util.print('오늘 배송예약: ${deliveryDay.deliveryDetail.toString()}');
+
 
     Future.delayed(Duration(milliseconds: 700)) .then((onValue)
     => isContentLoading.value = false);
@@ -76,13 +72,14 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
       var isRegisterPhotoYn;
 
       //배송 완료 여부 확인
-      if(Get.find<DriverWorkService>().deliveryList.first.shipCompleteYn == 'Y'){
+      if(Get.find<DeliveryController>().deliveryDay.shipCompleteYn == 'Y'){
         Util.alert('이미 운송 완료 처리 되었습니다.');
 
       }else{
         // 상하차지 1개 이상 사진 등록 여부 확인
-        for(var i=0; i<deliveryDetail.length; i++){
-          if(deliveryDetail[i].photo.isEmpty && deliveryDetail[i].photo.length < 1){
+
+        for(var i=0; i<deliveryDay.deliveryDetail.length; i++){
+          if(deliveryDay.deliveryDetail[i].photo.length < 1){
             isRegisterPhotoYn = true;
           }
         }
@@ -92,17 +89,20 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
           Util.alert('모든 상/하차지에 사진이 1장씩은 등록되어야 합니다.');
 
         }else{
-          for(var i=0; i<deliveryDetail.length; i++){
-            for(var j=0; j<deliveryDetail[i].photo.length; j++){
-              if(deliveryDetail[i].photo[j] != null){
+          for(var i=0; i<deliveryDay.deliveryDetail.length; i++){
+            for(var j=0; j<deliveryDay.deliveryDetail[i].photo.length; j++){
+              if(deliveryDay.deliveryDetail[i].photo[j] != null){
+                Util.print('[사진 업로드]- [ID]:${deliveryDay.deliveryDetail[i].routeId}, [순번]:${j+1}, [사진 파일]: ${deliveryDay.deliveryDetail[i].photo[j].toString()}');
+
+
                 //상하차지 구분 및 사진 순서 별 사진 업로드
-                await conveyancePhotoRepository.registerPhoto(deliveryDetail[i].photo[j], j+1, deliveryDetail[i].routeId);
+                await conveyancePhotoRepository.registerPhoto(deliveryDay.deliveryDetail[i].photo[j], j+1, deliveryDay.deliveryDetail[i].routeId);
               }
-              Util.print('[사진 업로드]- [ID]:${deliveryDetail[i].routeId}, [순번]:${j+1}, [사진 파일]: ${deliveryDetail[i].photo[j].toString()}');
+              Util.print('[사진 업로드]- [ID]:${deliveryDay.deliveryDetail[i].routeId}, [순번]:${j+1}, [사진 파일]: ${deliveryDay.deliveryDetail[i].photo[j].toString()}');
             }
           }
           //운송 완료 처리
-          result = await completeDelivery(Get.find<DriverWorkService>().deliveryList.first.delSn);
+          result = await completeDelivery(Get.find<DeliveryController>().deliveryDay.delSn);
         }
       }
 
@@ -112,9 +112,9 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
           Get.offAllNamed(Routes.MAINVIEW);
         });
       }
-
     } catch (e) {
-      Get.showSnackbar(Ui.ErrorSnackBar(message: e.message));
+      Util.print('완료사진 등록 중 오류가 발생하였습니다.');
+      Util.print(e);
     }
 }
 
@@ -129,38 +129,6 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
 
     }catch(e){
       Util.print(e);
-    }
-  }
-
-
-
-
-
-
-  /**
-   *  완료사진 리스트 조회
-   */
-  void getDispatchRouteList() async {
-    var routeId = <int>[].obs;
-    deliveryDetail.clear();
-
-    Get.find<DriverWorkService>().deliveryList.forEach((element) {
-      routeId.add(element.delSn);
-    });
-
-
-    //사진 업로드 위한 배송주문 리스트 조회
-    if(routeId != null && routeId.length > 0){
-      vehicleRouteId = routeId[0];
-      List<DeliveryDetail> data = await conveyancePhotoRepository.getDispatchRouteList(routeId[0]); //ID 경유지, 하차지 조회
-      //Util.print('List<DeliveryDetail> data: ${data.toString()}');
-
-      data.forEach((element) {
-        if(element.nodeTypeCd.codeKey == 'P' || element.nodeTypeCd.codeKey == 'E'){
-          deliveryDetail.add(element);
-        }
-      });
-      Util.print('완료사진 리스트 조회 getDispatchRouteList().deliveryDetail: ${deliveryDetail}');
     }
   }
 }

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mocar_test/app/common/util.dart';
+import 'package:mocar_test/app/models/enum.dart';
 import 'package:mocar_test/app/modules/conveyance/controllers/conveyance_photo_controller.dart';
 import 'package:mocar_test/app/modules/root/controllers/root_controller.dart';
-import 'package:mocar_test/app/models/enum.dart';
 
 
 /**
@@ -42,7 +42,7 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        '${controller.deliveryDetail[index].nodeTypeCd.codeName}',
+                         '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName}',
                         style: TextStyle(
                           fontFamily: 'Noto Sans',
                           fontSize: 12,
@@ -54,7 +54,7 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
                       Row(
                         children: [
                           Text(
-                            '${controller.deliveryDetail[index].nodeName}',
+                            '${controller.deliveryDay.deliveryDetail[index].nodeName}',
                             style: TextStyle(
                               fontFamily: 'Noto Sans',
                               fontSize: 16,
@@ -79,8 +79,7 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
           children: [
             SizedBox(width: 16),
             Text(
-              // section.value.contains('상차') ? '상차(픽업)' : '하차지',
-              '${controller.deliveryDetail[index].nodeTypeCd.codeName.contains('상차') ? '상차(픽업)' : '하차지'}',
+              '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName.contains('상차') ? '상차(픽업) ' : '하차지 '}',
               style: TextStyle(
                 color: Color(0xdd00AC76),
                 fontFamily: 'NotoSansKR',
@@ -128,14 +127,14 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
 
     var photoUrl = ''.obs;
 
-    if(controller.deliveryDetail[index].attachImageUrl1 != null && disNo == 1){
-      photoUrl.value = controller.deliveryDetail[index].attachImageUrl1;
+    if(controller.deliveryDay.deliveryDetail[index].attachImageUrl1 != null && disNo == 1){
+      photoUrl.value = controller.deliveryDay.deliveryDetail[index].attachImageUrl1;
 
-    }else if(controller.deliveryDetail[index].attachImageUrl2 != null && disNo == 2){
-      photoUrl.value = controller.deliveryDetail[index].attachImageUrl2;
+    }else if(controller.deliveryDay.deliveryDetail[index].attachImageUrl2 != null && disNo == 2){
+      photoUrl.value = controller.deliveryDay.deliveryDetail[index].attachImageUrl2;
 
-    }else if(controller.deliveryDetail[index].attachImageUrl3 != null && disNo == 3){
-      photoUrl.value = controller.deliveryDetail[index].attachImageUrl3;
+    }else if(controller.deliveryDay.deliveryDetail[index].attachImageUrl3 != null && disNo == 3){
+      photoUrl.value = controller.deliveryDay.deliveryDetail[index].attachImageUrl3;
     }
     Util.print('photoUrl: ${photoUrl.value}');
 
@@ -163,11 +162,11 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
       );
     }
 
-    // 그외 경우
     final photo1 = File('').obs;
     final photo2 = File('').obs;
     final photo3 = File('').obs;
 
+    // 그외 경우
     var tempFile = File('').obs;
     if(disNo == 1){
       tempFile = photo1;
@@ -185,19 +184,20 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
 
           if (disNo == 1) {
             photo1.value = file != null ? file : photo1.value;
-            controller.deliveryDetail[index].photo.add(file);
+            controller.deliveryDay.deliveryDetail[index].photo.add(file);
             Util.print('photo1.value: ${photo1.value.path}, [순번] ${disNo}');
-
-          }else if(disNo == 2){
+          }
+          else if(disNo == 2){
             photo2.value = file != null ? file : photo2.value;
-            controller.deliveryDetail[index].photo.add(file);
+            controller.deliveryDay.deliveryDetail[index].photo.add(file);
             Util.print('photo2.value: ${photo2.value.path}, [순번] ${disNo}');
 
           }else{
             photo3.value = file != null ? file : photo3.value;
-            controller.deliveryDetail[index].photo.add(file);
+            controller.deliveryDay.deliveryDetail[index].photo.add(file);
             Util.print('photo3.value: ${photo3.value.path}, [순번] ${disNo}');
           }
+
 
         },
         child: Padding(
