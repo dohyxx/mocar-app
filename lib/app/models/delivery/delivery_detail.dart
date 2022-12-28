@@ -23,12 +23,17 @@ class DeliveryDetail extends Model {
   String attachImageUrl3;
   int pltQty;                //파레트 개수
   String orderNo;            //주문 번호
+  String locMngName;         //담당자 이름
+  String locMngEmail;        //담당자 이메일
+  String locMngPhone;        //담당자 전화번호
 
   var photo = <File>[];
 
 
   DeliveryDetail({this.routeId,this.pickLocationId, this.dropLocationId, this.nodeSeq, this.nodeTypeCd, this.nodeName, this.nodeShipExptTime, this.pltQty, this.orderNo,
-      this.nodeDistance, this.locationName, this.roadAddress, this.roadAddrDetail, this.attachImageUrl1, this.attachImageUrl2, this.attachImageUrl3, this.address});
+      this.nodeDistance, this.locationName, this.roadAddress, this.roadAddrDetail, this.attachImageUrl1, this.attachImageUrl2, this.attachImageUrl3, this.address,
+      this.locMngName, this.locMngEmail, this.locMngPhone
+  });
 
 
   DeliveryDetail.fromJson(Map<String, dynamic> json) {
@@ -50,6 +55,9 @@ class DeliveryDetail extends Model {
     attachImageUrl3 = stringFromJson(json, 'attach_img_url_3');
     orderNo = stringFromJson(json, 'order_no');
     address = stringFromJson(json, 'addr');
+    locMngName = stringFromJson(json, 'pickup_loc_mng_nm');
+    locMngEmail = stringFromJson(json, 'pickup_loc_mng_email');
+    locMngPhone = stringFromJson(json, 'pickup_loc_mng_phone_no');
   }
 
   Map<String, dynamic> toJson() {
@@ -71,6 +79,9 @@ class DeliveryDetail extends Model {
     data['attach_img_url_3'] = this.attachImageUrl3;
     data['order_no'] = this.orderNo;
     data['addr'] = this.address;
+    data['pickup_loc_mng_nm'] = this.locMngName;
+    data['pickup_loc_mng_email'] = this.locMngEmail;
+    data['pickup_loc_mng_phone_no'] = this.locMngPhone;
 
     return data;
   }

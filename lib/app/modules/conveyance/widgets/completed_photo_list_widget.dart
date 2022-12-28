@@ -127,13 +127,13 @@ class CompletedPhotoListWidget extends GetWidget<ConveyancePhotoController> {
 
     var photoUrl = ''.obs;
 
-    if(controller.deliveryDay.deliveryDetail[index].attachImageUrl1 != null && disNo == 1){
+    if(controller.deliveryDay.deliveryDetail[index].attachImageUrl1 != '' && disNo == 1){
       photoUrl.value = controller.deliveryDay.deliveryDetail[index].attachImageUrl1;
 
-    }else if(controller.deliveryDay.deliveryDetail[index].attachImageUrl2 != null && disNo == 2){
+    }else if(controller.deliveryDay.deliveryDetail[index].attachImageUrl2 != '' && disNo == 2){
       photoUrl.value = controller.deliveryDay.deliveryDetail[index].attachImageUrl2;
 
-    }else if(controller.deliveryDay.deliveryDetail[index].attachImageUrl3 != null && disNo == 3){
+    }else if(controller.deliveryDay.deliveryDetail[index].attachImageUrl3 != '' && disNo == 3){
       photoUrl.value = controller.deliveryDay.deliveryDetail[index].attachImageUrl3;
     }
     Util.print('photoUrl: ${photoUrl.value}');
