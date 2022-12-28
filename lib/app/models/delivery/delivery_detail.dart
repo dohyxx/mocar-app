@@ -14,9 +14,10 @@ class DeliveryDetail extends Model {
   String nodeName;            //경로명
   String  nodeShipExptTime;   //구간 배송 예상 시간
   int nodeDistance;           //구간 배송 거리
-  String locationName;        // 상/하차지명
-  String roadAddress;         // 상/하차지 주소
-  String roadAddrDetail;      // 상/하차지 상세주소
+  String locationName;        //상/하차지명
+  String address;             //지번
+  String roadAddress;         //도로명 주소
+  String roadAddrDetail;      //도로명 상세주소
   String attachImageUrl1;
   String attachImageUrl2;
   String attachImageUrl3;
@@ -27,7 +28,7 @@ class DeliveryDetail extends Model {
 
 
   DeliveryDetail({this.routeId,this.pickLocationId, this.dropLocationId, this.nodeSeq, this.nodeTypeCd, this.nodeName, this.nodeShipExptTime, this.pltQty, this.orderNo,
-      this.nodeDistance, this.locationName, this.roadAddress, this.roadAddrDetail, this.attachImageUrl1, this.attachImageUrl2, this.attachImageUrl3});
+      this.nodeDistance, this.locationName, this.roadAddress, this.roadAddrDetail, this.attachImageUrl1, this.attachImageUrl2, this.attachImageUrl3, this.address});
 
 
   DeliveryDetail.fromJson(Map<String, dynamic> json) {
@@ -48,6 +49,7 @@ class DeliveryDetail extends Model {
     attachImageUrl2 = stringFromJson(json, 'attach_img_url_2');
     attachImageUrl3 = stringFromJson(json, 'attach_img_url_3');
     orderNo = stringFromJson(json, 'order_no');
+    address = stringFromJson(json, 'addr');
   }
 
   Map<String, dynamic> toJson() {
@@ -68,6 +70,7 @@ class DeliveryDetail extends Model {
     data['attach_img_url_2'] = this.attachImageUrl2;
     data['attach_img_url_3'] = this.attachImageUrl3;
     data['order_no'] = this.orderNo;
+    data['addr'] = this.address;
 
     return data;
   }

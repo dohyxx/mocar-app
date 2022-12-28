@@ -294,25 +294,19 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                         SizedBox(height: 18),
 
                         // 당일 배송예약 리스트 시작
-                        Obx(() {
-                          if (controller.deliveryList.length > 0) {
-                            return ListView.builder(
+                        ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 controller: controller.scrollController,
-                                itemCount: controller.deliveryList[0].deliveryDetail.length,
+                                itemCount: controller.deliveryDay.deliveryDetail.length,
                                 itemBuilder: (context, index) {
                                   return DeliveryListBottomWidget(index: index);
-                            });
-                          } else {
-                            return EmptyRowWidget();
-                          }
-                        }),
+                            }),
                         //배송예약 리스트 종료
 
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                           child: Row(
                             children: [
                               Expanded(

@@ -68,8 +68,7 @@ class CompletedPhotoView extends GetView<ConveyancePhotoController> {
                       return Center(
                           heightFactor: 5,
                           child: new CircularLoadingWidget(height: 90));
-                    }
-                    else if(controller.deliveryDay.deliveryDetail.length > 0){
+                    } else if(controller.deliveryDay.delSn != null){
                       return ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,

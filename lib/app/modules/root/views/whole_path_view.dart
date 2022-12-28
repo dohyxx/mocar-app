@@ -292,8 +292,9 @@ class WholePathView extends GetView<DeliveryController> {
 
 
 
+              controller.deliveryDay != null && controller.deliveryDay.delSn != null
               //하단 BottomSheet 시작
-              Row(
+              ? Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
@@ -467,7 +468,8 @@ class WholePathView extends GetView<DeliveryController> {
                     ),
                   ),
                 ],
-              ),
+              )
+                  :SizedBox(),
             // ],
           // ),
         );

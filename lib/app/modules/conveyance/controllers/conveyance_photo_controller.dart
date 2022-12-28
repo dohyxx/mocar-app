@@ -74,7 +74,11 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
       //배송 완료 여부 확인
       if(Get.find<DeliveryController>().deliveryDay.shipCompleteYn == 'Y'){
         Util.alert('이미 운송 완료 처리 되었습니다.');
+        return;
 
+      }else if(Get.find<DeliveryController>().deliveryDay.delSn == null){
+        Util.alert('오늘 배송이 없습니다.');
+        return;
       }else{
         // 상하차지 1개 이상 사진 등록 여부 확인
 
