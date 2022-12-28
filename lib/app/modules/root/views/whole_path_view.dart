@@ -298,162 +298,170 @@ class WholePathView extends GetView<DeliveryController> {
                 children: [
                   Expanded(
                     flex: 7,
-                    child: Container(
-                      height: 125,
-                      decoration: BoxDecoration(
-                        color: Color(0xff333D4B),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(18),
-                            topLeft: Radius.circular(18)),
-                        boxShadow: [
-                          // BoxShadow(
-                          // color: Get.theme.focusColor.withOpacity(0.2),
-                          // blurRadius: 10,
-                          // offset: Offset(0, -20)),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 10),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 8),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: '오늘 ',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'NotoSansKR',
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: '${DateFormat('MM.dd').format(Get.find<SettingsService>().today)} ${Util.weekdayName(Get.find<SettingsService>().today.weekday, isFull: true)}',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'NotoSansKR',
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: '  |  ',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'NotoSansKR',
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: '상차 -',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'NotoSansKR',
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      MaterialButton(
-                                        padding: EdgeInsets.all(0),
-                                        minWidth: 0,
-                                        onPressed: () {
-                                          Get.bottomSheet(
-                                            DeliveryCardWidget(),
-                                            isScrollControlled: true,
-                                          );
-                                        },
-                                        child: Icon(
-                                          Icons.arrow_drop_up,
-                                          color: Colors.white,
-                                          size: 35,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Image.asset('assets/icon/top-s.png'),
-                                  SizedBox(width: 5),
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: controller.deliveryList.length > 0 && controller.deliveryList[0].deliveryDetail[0].roadAddress != ''
-                                              ? '${controller.deliveryList[0].deliveryDetail[0].roadAddress}'
-                                              : '-',
-                                          style: TextStyle(
-                                            color: Color(0xffFFFFFF),
-                                            fontSize: 14,
-                                            fontFamily: 'NotoSansKR',
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 16,
-                                      fontFamily: 'NotoSansKR',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5, top: 5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Image.asset('assets/icon/down-s.png'),
-                                  SizedBox(width: 5),
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text:
-                                          controller.deliveryList.length > 0 && controller.deliveryList[0].deliveryDetail[1].roadAddress != ''
-                                              ? '${controller.deliveryList[0].deliveryDetail[1].roadAddress}'
-                                              : '-',
-                                          style: TextStyle(
-                                            color: Color(0xffFFFFFF),
-                                            fontSize: 14,
-                                            fontFamily: 'NotoSansKR',
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 16,
-                                      fontFamily: 'NotoSansKR',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                    child: GestureDetector(
+                      onVerticalDragUpdate: (details){
+                        Get.bottomSheet(
+                          DeliveryCardWidget(),
+                          isScrollControlled: true,
+                        );
+                      },
+                      child: Container(
+                        height: 125,
+                        decoration: BoxDecoration(
+                          color: Color(0xff333D4B),
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(18),
+                              topLeft: Radius.circular(18)),
+                          boxShadow: [
+                            // BoxShadow(
+                            // color: Get.theme.focusColor.withOpacity(0.2),
+                            // blurRadius: 10,
+                            // offset: Offset(0, -20)),
                           ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 10),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 8),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '오늘 ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontFamily: 'NotoSansKR',
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: '${DateFormat('MM.dd').format(Get.find<SettingsService>().today)} ${Util.weekdayName(Get.find<SettingsService>().today.weekday, isFull: true)}',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontFamily: 'NotoSansKR',
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: '  |  ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontFamily: 'NotoSansKR',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: '상차 -',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontFamily: 'NotoSansKR',
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        MaterialButton(
+                                          padding: EdgeInsets.all(0),
+                                          minWidth: 0,
+                                          onPressed: () {
+                                            Get.bottomSheet(
+                                              DeliveryCardWidget(),
+                                              isScrollControlled: true,
+                                            );
+                                          },
+                                          child: Icon(
+                                            Icons.arrow_drop_up,
+                                            color: Colors.white,
+                                            size: 35,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Image.asset('assets/icon/top-s.png'),
+                                    SizedBox(width: 5),
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: controller.deliveryList.length > 0 && controller.deliveryList[0].deliveryDetail[0].roadAddress != ''
+                                                ? '${controller.deliveryList[0].deliveryDetail[0].roadAddress}'
+                                                : '-',
+                                            style: TextStyle(
+                                              color: Color(0xffFFFFFF),
+                                              fontSize: 14,
+                                              fontFamily: 'NotoSansKR',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 16,
+                                        fontFamily: 'NotoSansKR',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5, top: 5),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Image.asset('assets/icon/down-s.png'),
+                                    SizedBox(width: 5),
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text:
+                                            controller.deliveryList.length > 0 && controller.deliveryList[0].deliveryDetail[1].roadAddress != ''
+                                                ? '${controller.deliveryList[0].deliveryDetail[1].roadAddress}'
+                                                : '-',
+                                            style: TextStyle(
+                                              color: Color(0xffFFFFFF),
+                                              fontSize: 14,
+                                              fontFamily: 'NotoSansKR',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 16,
+                                        fontFamily: 'NotoSansKR',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

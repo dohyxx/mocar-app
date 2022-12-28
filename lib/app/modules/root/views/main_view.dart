@@ -350,111 +350,122 @@ class MainView extends GetView<RootController> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Container(
-                        height: 104,
-                        decoration: BoxDecoration(
-                          color: Color(0xff333D4B),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20)),
-                          boxShadow: [
-                            // BoxShadow(
-                            // color: Get.theme.focusColor.withOpacity(0.2),
-                            // blurRadius: 10,
-                            // offset: Offset(0, -20)),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16, right: 10),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 8),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: '${Get.find<SettingsService>().today.month}월 ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontFamily: 'NotoSansKR',
-                                              fontWeight: FontWeight.w500,
+                      child: GestureDetector(
+                        onVerticalDragUpdate: (details){
+                          Get.bottomSheet(
+                            MainBottomWidget(),
+                            isScrollControlled: true,
+                          );
+                        },
+                        child: Container(
+                          height: 104,
+                          decoration: BoxDecoration(
+                            color: Color(0xff333D4B),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20)),
+                            boxShadow: [
+                              // BoxShadow(
+                              // color: Get.theme.focusColor.withOpacity(0.2),
+                              // blurRadius: 10,
+                              // offset: Offset(0, -20)),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 10),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 8),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text.rich(
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: '${Get.find<SettingsService>().today.month}월 ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontFamily: 'NotoSansKR',
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                          TextSpan(
-                                            text: '정산 명세서',
-                                            style: TextStyle(
+                                            TextSpan(
+                                              text: '정산 명세서',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontFamily: 'NotoSansKR',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: 'NotoSansKR',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          MaterialButton(
+                                            padding: EdgeInsets.all(0),
+                                            minWidth: 0,
+                                            onPressed: () {
+                                              //메인 하단 팝업 펼진 내용 시작
+                                              Get.bottomSheet(
+                                                MainBottomWidget(),
+                                                isDismissible: true,
+                                                isScrollControlled: true,
+                                                enableDrag: true,
+
+                                              );
+                                            },
+                                            child: Icon(
+                                              Icons.arrow_drop_up,
                                               color: Colors.white,
-                                              fontSize: 16,
-                                              fontFamily: 'NotoSansKR',
-                                              fontWeight: FontWeight.w500,
+                                              size: 35,
                                             ),
                                           ),
                                         ],
                                       ),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontFamily: 'NotoSansKR',
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        MaterialButton(
-                                          padding: EdgeInsets.all(0),
-                                          minWidth: 0,
-                                          onPressed: () {
-                                            //메인 하단 팝업 펼진 내용 시작
-                                            Get.bottomSheet(
-                                              MainBottomWidget(),
-                                              isScrollControlled: true,
-                                            );
-                                          },
-                                          child: Icon(
-                                            Icons.arrow_drop_up,
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 15),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${Util.numberWithComma(controller.monthTotalCost.value,isDecimal: false)}원',
+                                        style: TextStyle(
                                             color: Colors.white,
-                                            size: 35,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                        Text(
+                                          controller.monthCostList.length != 0  && controller.monthCostList != null
+                                            ? '최근 ${Util.dateForm(controller.monthCostList[0].pickupDate, type: 1)} ${Util.numberWithComma(controller.monthCostList[0].totalAmount, isDecimal: false)}원'
+                                            : '최근 내역 없음',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 5, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${Util.numberWithComma(controller.monthTotalCost.value,isDecimal: false)}원',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                      Text(
-                                        controller.monthCostList.length != 0  && controller.monthCostList != null
-                                          ? '최근 ${Util.dateForm(controller.monthCostList[0].pickupDate, type: 1)} ${Util.numberWithComma(controller.monthCostList[0].totalAmount, isDecimal: false)}원'
-                                          : '최근 내역 없음',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),

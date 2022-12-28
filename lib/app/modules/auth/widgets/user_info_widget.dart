@@ -31,6 +31,9 @@ class UserInfoWidget extends GetView<AuthController> {
         backgroundColor: Color(0x00F5F5F5),
         body: SafeArea(
           child: GestureDetector(
+            // onPanDown: (details){
+            //
+            // },
             onTap: () => FocusScope.of(context).unfocus(),
             child: Align(
               alignment: AlignmentDirectional(0, 0),

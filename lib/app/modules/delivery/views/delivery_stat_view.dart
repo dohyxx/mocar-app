@@ -244,160 +244,130 @@ class DeliveryStatView extends GetView<DeliveryController> {
           mainAxisSize: MainAxisSize.max,
           children: [
           Expanded(
-            child: Container(
-            height: 164,
-            decoration: BoxDecoration(
-              color: Color(0xff333D4B),
-              borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-            boxShadow: [
-              // BoxShadow(
-              // color: Get.theme.focusColor.withOpacity(0.2),
-              // blurRadius: 10,
-              // offset: Offset(0, -20)),
-              ],
-            ),
-            child: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 10),
-            child:
-              Column(
-                children: [
+            child: GestureDetector(
+              onVerticalDragUpdate: (details){
+                Get.bottomSheet(
+                  DeliveryCardWidget(),
+                  isScrollControlled: true,
+                );
+              },
+              child: Container(
+              height: 164,
+              decoration: BoxDecoration(
+                color: Color(0xff333D4B),
+                borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+              boxShadow: [
+                // BoxShadow(
+                // color: Get.theme.focusColor.withOpacity(0.2),
+                // blurRadius: 10,
+                // offset: Offset(0, -20)),
+                ],
+              ),
+              child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 10),
+              child:
+                Column(
+                  children: [
 
-                SizedBox(height: 8),
+                  SizedBox(height: 8),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                      child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                            children: [
-                              TextSpan(text: '오늘 ',
-                                  style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'NotoSansKR',
-                                  fontWeight:
-                                  FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(text: '${DateFormat('MM.dd').format(Get.find<SettingsService>().today)} ${Util.weekdayName(Get.find<SettingsService>().today.weekday, isFull: true)}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'NotoSansKR',
-                                  fontWeight:
-                                  FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(
-                              text: ' | ',
-                                  style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'NotoSansKR',
-                                  fontWeight:
-                                  FontWeight.w500,
-                                ),
-                              ),
-                              TextSpan(
-                              text: '상차 -',
-                                  style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'NotoSansKR',
-                                  fontWeight:
-                                  FontWeight.w500,
-                                  ),
-                                 ),
-                                ],
-                              ),
-                                  style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'NotoSansKR',
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-
-                            Row(
-                              children: [
-                                MaterialButton(
-                                  padding: EdgeInsets.all(0),
-                                  minWidth: 0,
-                                  onPressed: () {
-                                    Get.bottomSheet(
-                                      DeliveryCardWidget(),
-                                      isScrollControlled: true,
-                                    );
-                                  },
-                                child: Icon(
-                                  Icons.arrow_drop_up,
-                                  color: Colors.white,
-                                  size: 35,
-                                  ),
-                                ),
-                              ],
-                            ),
-                           ],
-                         ),
-                      ),
-
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
                         child:
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset('assets/icon/top-s.png'),
-
-                            SizedBox(width: 5),
-
                             Text.rich(
                               TextSpan(
-                                children: [
-                                  TextSpan(text:
-                                      '${controller.deliveryDay.deliveryDetail[0].roadAddress}',
+                              children: [
+                                TextSpan(text: '오늘 ',
                                     style: TextStyle(
-                                      color: Color(0xffFFFFFF),
-                                      fontSize: 14,
-                                      fontFamily: 'NotoSansKR',
-                                      fontWeight:
-                                      FontWeight.w500,
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'NotoSansKR',
+                                    fontWeight:
+                                    FontWeight.w500,
+                                  ),
+                                ),
+                                TextSpan(text: '${DateFormat('MM.dd').format(Get.find<SettingsService>().today)} ${Util.weekdayName(Get.find<SettingsService>().today.weekday, isFull: true)}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'NotoSansKR',
+                                    fontWeight:
+                                    FontWeight.w500,
+                                  ),
+                                ),
+                                TextSpan(
+                                text: ' | ',
+                                    style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'NotoSansKR',
+                                    fontWeight:
+                                    FontWeight.w500,
+                                  ),
+                                ),
+                                TextSpan(
+                                text: '상차 -',
+                                    style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'NotoSansKR',
+                                    fontWeight:
+                                    FontWeight.w500,
+                                    ),
+                                   ),
+                                  ],
+                                ),
+                                    style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'NotoSansKR',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+
+                              Row(
+                                children: [
+                                  MaterialButton(
+                                    padding: EdgeInsets.all(0),
+                                    minWidth: 0,
+                                    onPressed: () {
+                                      Get.bottomSheet(
+                                        DeliveryCardWidget(),
+                                        isScrollControlled: true,
+                                      );
+                                    },
+                                  child: Icon(
+                                    Icons.arrow_drop_up,
+                                    color: Colors.white,
+                                    size: 35,
                                     ),
                                   ),
                                 ],
                               ),
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 16,
-                                fontFamily: 'NotoSansKR',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
+                             ],
+                           ),
                         ),
-                      ),
 
 
                         Padding(
-                          padding: const EdgeInsets.only(left: 5, top: 5),
+                          padding: const EdgeInsets.only(left: 5),
                           child:
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Image.asset('assets/icon/down-s.png'),
+                              Image.asset('assets/icon/top-s.png'),
 
                               SizedBox(width: 5),
+
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
-                                      text:
-                                        '${controller.deliveryDay.deliveryDetail[1].roadAddress}',
+                                    TextSpan(text:
+                                        '${controller.deliveryDay.deliveryDetail[0].roadAddress}',
                                       style: TextStyle(
                                         color: Color(0xffFFFFFF),
                                         fontSize: 14,
@@ -406,7 +376,6 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                         FontWeight.w500,
                                       ),
                                     ),
-
                                   ],
                                 ),
                                 style: TextStyle(
@@ -419,84 +388,62 @@ class DeliveryStatView extends GetView<DeliveryController> {
                             ],
                           ),
                         ),
-                      SizedBox(height: 16),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            flex:3,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF5F7FA),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                                  child:
-                                  Text(
-                                    '총 ${controller.deliveryDay.totalDistance}km',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'NotoSansKR',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
 
-                          SizedBox(width: 8),
-
-                          Expanded(
-                            flex: 2,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5, top: 5),
                             child:
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF5F7FA),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-                                  child:
-                                  Text(
-                                    '경유 ${controller.deliveryDay.routeCnt}',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'NotoSansKR',
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Image.asset('assets/icon/down-s.png'),
+
+                                SizedBox(width: 5),
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                          '${controller.deliveryDay.deliveryDetail[1].roadAddress}',
+                                        style: TextStyle(
+                                          color: Color(0xffFFFFFF),
+                                          fontSize: 14,
+                                          fontFamily: 'NotoSansKR',
+                                          fontWeight:
+                                          FontWeight.w500,
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 16,
+                                    fontFamily: 'NotoSansKR',
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
+                        SizedBox(height: 16),
 
-                          SizedBox(width: 8),
-
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF5F7FA),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'assets/icon/icon_3.png',
-                                    ),
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              flex:3,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF5F7FA),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                                    child:
                                     Text(
-                                      '${controller.deliveryDay.deliveryDetail[1].nodeName}',
+                                      '총 ${controller.deliveryDay.totalDistance}km',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 12,
@@ -504,17 +451,78 @@ class DeliveryStatView extends GetView<DeliveryController> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+
+                            SizedBox(width: 8),
+
+                            Expanded(
+                              flex: 2,
+                              child:
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF5F7FA),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                                    child:
+                                    Text(
+                                      '경유 ${controller.deliveryDay.routeCnt}',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'NotoSansKR',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(width: 8),
+
+                            Expanded(
+                              flex: 5,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF5F7FA),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset(
+                                        'assets/icon/icon_3.png',
+                                      ),
+
+                                      Text(
+                                        '${controller.deliveryDay.deliveryDetail[1].nodeName}',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontFamily: 'NotoSansKR',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+            ),
             ),
          ],
        )
