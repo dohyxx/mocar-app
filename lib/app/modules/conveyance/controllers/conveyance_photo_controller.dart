@@ -46,6 +46,10 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
 
     // getDispatchRouteList();
     deliveryDay = Get.find<DeliveryController>().deliveryDay;
+
+    deliveryDay.deliveryDetail.forEach((element) {
+      element.photo.clear();
+    });
     Util.print('오늘 배송예약: ${deliveryDay.deliveryDetail.toString()}');
 
 
