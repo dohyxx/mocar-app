@@ -9,11 +9,9 @@ class BoardRepository extends BaseRepository{
    */
   Future<Map<String, dynamic>> getNoticeList() async {
 
-      //라우트 경로 지정
       Uri _uri = getApiBaseUri("notice");
       Get.log('<==== _uri : ' + _uri.toString());
 
-      //API 호출
       var response = await httpClient.getUri(_uri, options: optionsCache);
 
       if (response.data['resultCode'] == 200) {

@@ -21,7 +21,7 @@ class MainMenuCardWidget extends GetWidget<RootController> {
   Widget build(BuildContext context) {
 
     switch(type.value){
-      case 0: count.value = controller.delCnt.value;
+      case 0: count.value = Get.find<DeliveryController>().delTotalCnt.value;
               menuLogo = Images.menuLogo1;
               targetPage = Routes.DELIVERYSTAT;
               break;
@@ -66,6 +66,7 @@ class MainMenuCardWidget extends GetWidget<RootController> {
                     child: Obx(() => MaterialButton(
                         onPressed: () async {
                           if(type.value != 1){
+                            if(type.value == 0) await Get.find<DeliveryController>().onRefresh();
                             Get.toNamed(targetPage);
                           }else{
                             controller.toggleYn.value = 1;

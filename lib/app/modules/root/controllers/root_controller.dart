@@ -60,10 +60,10 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
     isContentLoading.value = true;
     await getMonthCost();
     await getNoticeCnt();
-    await getDeliveryCnt();
     await getAlarmList();
     await getVehicleInfo();
     await getEnterpriseInfo();
+    await Get.find<DeliveryController>().getDeliveryList();
 
     isContentLoading.value = false;
   }
@@ -100,18 +100,6 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
     }
   }
 
-
-  /**
-   *  메인 배송예약 갯수 조회
-   */
-  void getDeliveryCnt() async {
-    try {
-      Map<String, dynamic> data = await Get.find<DriverWorkService>().getDeliveryList();
-      delCnt.value = data['totalCnt'];
-    } catch (e) {
-      Util.print(e);
-    }
-  }
 
   /**
    *  메인 알림내역 갯수 조회

@@ -25,7 +25,7 @@ class CostRepository extends BaseRepository{
       Get.log('<==== _uri : ' +_uri.toString());
 
       var response = await httpClient.getUri(_uri, options: optionsCache);
-      Util.print('월별정산 목록 조회: ${response}');
+      //Util.print('월별정산 목록 조회: ${response}');
 
 
       if (response.data['resultCode'] == 200) {
