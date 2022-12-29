@@ -23,11 +23,9 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
 
     if(controller.deliveryDay.shipCompleteYn == 'Y'){
       statusText = '상/하차 완료'.obs;
-
         if(controller.deliveryDay.deliveryDetail[index].attachImageUrl1 != '') photoCnt.value++;
         if(controller.deliveryDay.deliveryDetail[index].attachImageUrl2 != '') photoCnt.value++;
         if(controller.deliveryDay.deliveryDetail[index].attachImageUrl3 != '') photoCnt.value++;
-
     }else{
       statusText = '사진 요망'.obs;
     }
@@ -185,8 +183,104 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 8),
+                                    SizedBox(height: 5),
 
+                                    Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                              color: Color(0xffE1E6EB),
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 3),
+                                              child: Text(
+                                                '담당자',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                  fontFamily: 'NotoSansKR',
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        SizedBox(width: 12),
+
+                                        Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                                            child: Text(
+                                              controller.deliveryDay.deliveryDetail[index].locMngName != ''
+                                              ? '${controller.deliveryDay.deliveryDetail[index].locMngName}'
+                                              : '-',
+                                              style: TextStyle(
+                                                color: Color(0xff333D4B),
+                                                fontSize: 14,
+                                                fontFamily: 'NotoSansKR',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    SizedBox(height: 5),
+
+                                    Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                              color: Color(0xffE1E6EB),
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 3),
+                                              child: Text(
+                                                '연락처',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                  fontFamily: 'NotoSansKR',
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        SizedBox(width: 12),
+
+                                        Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                                            child: Text(
+                                              controller.deliveryDay.deliveryDetail[index].locMngPhone != ''
+                                                  ? '${controller.deliveryDay.deliveryDetail[index].locMngPhone}'
+                                                  : '-',
+                                              style: TextStyle(
+                                                color: Color(0xff333D4B),
+                                                fontSize: 14,
+                                                fontFamily: 'NotoSansKR',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+
+                                    SizedBox(height: 8),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [

@@ -81,12 +81,11 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
       monthCostList.addAll(data['monthCostList']);
       monthTotalCost.value = int.parse(data['monthTotalCost']);
       costCnt.value = data['monthCompletedCnt'];
-      Get.log('<========== 메인 월별정산 조회: ' + data.toString());
-
     } catch (e) {
       Util.print(e);
     }
   }
+
 
   /**
    *  메인 공지사항 갯수 조회
