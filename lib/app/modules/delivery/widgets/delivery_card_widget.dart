@@ -91,7 +91,7 @@ class DeliveryCardWidget extends GetView<DeliveryController> {
                                               ),
                                             ),
                                             TextSpan(
-                                              text: '상차 -',
+                                              text: '상차 09:00',
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16,

@@ -1,7 +1,7 @@
-import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:mocar_test/app/models/delivery/delivery_detail.dart';
 import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/models/enum.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
@@ -13,7 +13,6 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
   int index;
   var statusText = ''.obs;   //배송 상태
   var photoCnt = 0.obs;     //사진 등록 개수
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   DeliveryListBottomWidget({Key key, this.index,
   }) : super(key: key);
@@ -136,6 +135,22 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                             ),
                                           ),
                                         ),
+                                        SizedBox(width: 3),
+
+                                        CupertinoButton(
+                                          minSize: 30,
+                                          child: Icon(
+                                            Icons.copy_outlined,
+                                            color: Colors.grey,
+                                            size: 14,
+                                          ),
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () async {
+                                            Clipboard.setData(ClipboardData(text: controller.deliveryDay.deliveryDetail[index].address));
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text('복사되었습니다!'), ));
+                                            },
+                                        )
                                       ],
                                     ),
                                     SizedBox(height: 3),
@@ -181,6 +196,23 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                             ),
                                           ),
                                         ),
+                                        SizedBox(width: 3),
+
+
+                                        CupertinoButton(
+                                          minSize: 30,
+                                          child: Icon(
+                                              Icons.copy_outlined,
+                                              color: Colors.grey,
+                                              size: 14,
+                                            ),
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () async {
+                                            Clipboard.setData(ClipboardData(text: controller.deliveryDay.deliveryDetail[index].address));
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text('복사되었습니다!')));
+                                            },
+                                        )
                                       ],
                                     ),
                                     SizedBox(height: 5),
@@ -292,7 +324,9 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                             SizedBox(width: 5),
 
                                             Text(
-                                              '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName.substring(0,2)} - ',
+                                                controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName.substring(0,2).contains('상차')
+                                                ? '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName.substring(0,2)} 09:00'
+                                                : '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName.substring(0,2)} 14:30',
                                               style: TextStyle(
                                                 fontFamily: 'Noto Sans',
                                                 fontSize: 13,
@@ -417,6 +451,8 @@ class DeliveryListBottomWidget extends GetWidget<DeliveryController> {
                                       color: Color(0xffE1E6EB),
                                       thickness: 1,
                                     ),
+
+                                    SizedBox(height: 8),
                                   ],
                                 ),
                               ),
