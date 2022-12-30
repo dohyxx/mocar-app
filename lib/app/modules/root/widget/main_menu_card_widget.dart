@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/common/images.dart';
+import 'package:mocar_test/app/common/util.dart';
+import 'package:mocar_test/app/models/delivery/delivery.dart';
 import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/modules/root/controllers/root_controller.dart';
 import 'package:mocar_test/app/routes/app_routes.dart';
@@ -27,7 +29,8 @@ class MainMenuCardWidget extends GetWidget<RootController> {
               break;
       case 1: count.value = controller.routCnt.value;
               menuLogo = Images.menuLogo2;
-              targetPage = Routes.DELIVERYROUTE;
+              // Delivery data = Get.find<DeliveryController>().deliveryDay;
+              // if(data != null && data.delSn != '') targetPage = Routes.DELIVERYROUTE;
               break;
       case 2: count.value = controller.costCnt.value;
               menuLogo = Images.menuLogo3;
@@ -69,7 +72,11 @@ class MainMenuCardWidget extends GetWidget<RootController> {
                             if(type.value == 0) await Get.find<DeliveryController>().onRefresh();
                             Get.toNamed(targetPage);
                           }else{
-                            controller.toggleYn.value = 1;
+                            if(Get.find<DeliveryController>().deliveryDay.delSn != null){
+                              controller.toggleYn.value = 1;
+                            }else{
+                              Util.alert('오늘 배송이 없습니다.');
+                            }
                           }
                         },
                         child: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 
 class AnimatedToggleWidget extends StatefulWidget {
   final List<String> values;
@@ -39,6 +40,7 @@ class _AnimatedToggleState extends State<AnimatedToggleWidget> {
                 if (!widget.initialPosition) {
                   index = 1;
                 }
+                if(Get.find<DeliveryController>().deliveryDay.delSn != '')  widget.initialPosition = true;
                 widget.onToggleCallback(index);
                 setState(() {});
               },
