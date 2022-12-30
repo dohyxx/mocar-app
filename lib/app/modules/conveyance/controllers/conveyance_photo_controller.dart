@@ -102,11 +102,9 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
               if(deliveryDay.deliveryDetail[i].photo[j] != null){
                 Util.print('[사진 업로드]- [ID]:${deliveryDay.deliveryDetail[i].routeId}, [순번]:${j+1}, [사진 파일]: ${deliveryDay.deliveryDetail[i].photo[j].toString()}');
 
-
                 //상하차지 구분 및 사진 순서 별 사진 업로드
                 await conveyancePhotoRepository.registerPhoto(deliveryDay.deliveryDetail[i].photo[j], j+1, deliveryDay.deliveryDetail[i].routeId);
               }
-              Util.print('[사진 업로드]- [ID]:${deliveryDay.deliveryDetail[i].routeId}, [순번]:${j+1}, [사진 파일]: ${deliveryDay.deliveryDetail[i].photo[j].toString()}');
             }
           }
           //운송 완료 처리
@@ -119,9 +117,10 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
         Util.alert('운송 완료 처리 되었습니다.', callback: (){
           Get.offAllNamed(Routes.MAINVIEW);
         });
+      }else{
+        Util.print('완료사진 등록 중 오류가 발생하였습니다.');
       }
     } catch (e) {
-      Util.print('완료사진 등록 중 오류가 발생하였습니다.');
       Util.print(e);
     }
 }

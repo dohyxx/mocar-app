@@ -73,6 +73,7 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
       Map<String, dynamic> data = await Get.find<DriverWorkService>().getDeliveryList();
       deliveryList.addAll(data['deliveryList']);
       delTotalCnt.value = data['totalCnt'];
+      Util.print('[배송예약 목록]: ${deliveryList.toString()}');
 
       //총 금액
       deliveryList.forEach((element) {
@@ -89,14 +90,14 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
             //경유지 수
             if(deliveryList[i].deliveryDetail[j].nodeTypeCd.codeKey == 'P'){
               routeCnt.value++;
-              deliveryList[i].routeCnt = routeCnt.value;
-              Util.print('경유지 수: ${deliveryList[i].routeCnt.toString()}');
+              deliveryList[i].routeCnt = routeCnt.value-1;
+              //Util.print('경유지 수: ${deliveryList[i].routeCnt.toString()}');
             }
           }
         //오늘 배송
         if(deliveryList[i].pickUpDate == Util.dateForm(Get.find<SettingsService>().today, type: 2)){
           deliveryDay = deliveryList[i];
-          Util.print('오늘 배송예약 in Controller : ' + deliveryDay.toString());
+          Util.print('[오늘 배송예약]: ' + deliveryDay.toString());
         }
       }
 

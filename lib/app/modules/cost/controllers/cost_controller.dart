@@ -76,7 +76,7 @@ class CostController extends GetxController with GetSingleTickerProviderStateMix
 
 
       monthCostList.refresh();
-      Get.log('<================ 월별정산 조회 in Controller: ' + data.toString());
+      //Get.log('<================ 월별정산 조회 in Controller: ' + data.toString());
 
     } catch (e) {
     }
