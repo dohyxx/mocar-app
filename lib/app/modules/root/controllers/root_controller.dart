@@ -63,7 +63,6 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
     await getAlarmList();
     await getVehicleInfo();
     await getEnterpriseInfo();
-    await Get.find<DeliveryController>().getDeliveryList();
 
     isContentLoading.value = false;
   }

@@ -45,17 +45,19 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
     isContentLoading.value = true;
 
     // getDispatchRouteList();
-    deliveryDay = Get.find<DeliveryController>().deliveryDay;
+    deliveryDay = Get.find<DeliveryController>().deliveryDay.delSn != null ? Get.find<DeliveryController>().deliveryDay : null;
 
-    deliveryDay.deliveryDetail.forEach((element) {
-      element.photo.clear();
-    });
-    Util.print('오늘 배송예약: ${deliveryDay.deliveryDetail.toString()}');
-
+    if(deliveryDay != null){
+      deliveryDay.deliveryDetail.forEach((element) {
+        element.photo.clear();
+      });
+      Util.print('오늘 배송예약: ${deliveryDay.deliveryDetail.toString()}');
+    }
 
     Future.delayed(Duration(milliseconds: 700)) .then((onValue)
     => isContentLoading.value = false);
   }
+
 
   Future<File> getImage(ImageSource imageSource) async {
     final pickedFile = await picker.pickImage(source: imageSource, maxHeight: 800, maxWidth: 1000, imageQuality: 75);

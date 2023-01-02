@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mocar_test/app/common/util.dart';
+import 'package:mocar_test/app/modules/delivery/controllers/delivery_controller.dart';
 import 'package:mocar_test/app/modules/global_widgets/circular_loading_widget.dart';
 import 'package:mocar_test/app/modules/global_widgets/empty_row.dart';
 import 'package:mocar_test/app/modules/root/controllers/root_controller.dart';
@@ -22,7 +23,6 @@ class MainView extends GetView<RootController> {
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: () {
         if(controller.toggleYn.value != 0){
@@ -51,29 +51,34 @@ class MainView extends GetView<RootController> {
                   Text(
                     '메뉴',
                     style: TextStyle(
-                      color: controller.toggleYn == 0
+                      color: controller.toggleYn.value == 0
                           ? Color(0xff00AC76)
                           : Color(0xff333D4B),
                       fontFamily: 'NotoSansKR',
-                      fontWeight: controller.toggleYn == 0 ? FontWeight.w700 : FontWeight.w400,
+                      fontWeight: controller.toggleYn.value == 0 ? FontWeight.w700 : FontWeight.w400,
                       fontSize: 12,
                     ),
                   ),
                   AnimatedToggleWidget(
-                    initialPosition: controller.toggleYn == 0 ? true : false,
+                    initialPosition: controller.toggleYn.value == 0 ? true : false,
                     onToggleCallback: (value) async {
-                      Future.delayed(Duration(milliseconds: 120))
-                          .then((onValue) => controller.toggleYn.value = value);
+                      if(Get.find<DeliveryController>().deliveryDay.delSn != null){
+                        Future.delayed(Duration(milliseconds: 120))
+                            .then((onValue) => controller.toggleYn.value = value);
+                      }else{
+                        Util.alert('오늘 배송이 없습니다.', callback: (){
+                        });
+                      }
                     },
                   ),
                   Text(
                     '경로',
                     style: TextStyle(
-                      color: controller.toggleYn != 0
+                      color: controller.toggleYn.value != 0
                           ? Color(0xff00AC76)
                           : Color(0xff333D4B),
                       fontFamily: 'NotoSansKR',
-                      fontWeight: controller.toggleYn != 0 ? FontWeight.w700 : FontWeight.w400,
+                      fontWeight: controller.toggleYn.value != 0 ? FontWeight.w700 : FontWeight.w400,
                       fontSize: 12,
                     ),
                   ),
@@ -94,7 +99,9 @@ class MainView extends GetView<RootController> {
                     onRefresh: () async {
                       refreshKey.currentState.show(atTop: true);
                       // 새로고침
+                      await Get.find<DeliveryController>().getDeliveryList();
                       controller.onRefresh();
+
                       return null;
                     },
                     child: SingleChildScrollView(
@@ -454,7 +461,7 @@ class MainView extends GetView<RootController> {
                                       ),
                                         Text(
                                           controller.monthCostList.length != 0  && controller.monthCostList != null
-                                            ? '최근 ${Util.dateForm(controller.monthCostList[0].pickupDate, type: 1)} ${Util.numberWithComma(controller.monthCostList[0].totalAmount, isDecimal: false)}원'
+                                            ? '최근 ${Util.dateForm(controller.monthCostList[0].pickupDate, type: 1)}  ${Util.numberWithComma(controller.monthCostList[0].totalAmount, isDecimal: false)}원'
                                             : '최근 내역 없음',
                                           style: TextStyle(
                                             color: Colors.white,

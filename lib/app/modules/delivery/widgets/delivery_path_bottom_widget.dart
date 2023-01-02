@@ -27,13 +27,7 @@ class DeliveryPathBottomWidget extends GetWidget<DeliveryController> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  // width: MediaQuery.of(context).size.width,
                   child:
-                  // StreamBuilder<Object>(
-                  //     stream: null,
-                  //     builder: (context, snapshot) {
-                  //       return ExpandablePanel(
-                  //         header:
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +56,7 @@ class DeliveryPathBottomWidget extends GetWidget<DeliveryController> {
                                                     SizedBox(width: 2),
 
                                                     Text(
-                                                      '${controller.deliveryList[0].deliveryDetail[index].nodeTypeCd.codeName}',
+                                                      '${controller.deliveryDay.deliveryDetail[index].nodeTypeCd.codeName}',
                                                       style: TextStyle(
                                                         fontFamily: 'Noto Sans',
                                                         fontSize: 12,
@@ -78,7 +72,7 @@ class DeliveryPathBottomWidget extends GetWidget<DeliveryController> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      '${controller.deliveryList[0].deliveryDetail[index].nodeName}',
+                                                      '${controller.deliveryDay.deliveryDetail[index].nodeName}',
                                                       style: TextStyle(
                                                         fontFamily: 'Noto Sans',
                                                         fontSize: 16,
@@ -124,7 +118,7 @@ class DeliveryPathBottomWidget extends GetWidget<DeliveryController> {
                                                   child: Padding(
                                                     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                                                     child: Text(
-                                                      '${controller.deliveryList[0].deliveryDetail[index].roadAddress}',
+                                                      '${controller.deliveryDay.deliveryDetail[index].roadAddress}',
                                                       style: TextStyle(
                                                         color: Color(0xff333D4B),
                                                         fontSize: 13,
@@ -170,8 +164,8 @@ class DeliveryPathBottomWidget extends GetWidget<DeliveryController> {
                                                   child: Padding(
                                                     padding: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                                                     child: Text(
-                                                      controller.deliveryList[0].deliveryDetail[index].roadAddrDetail != ''
-                                                          ? '${controller.deliveryList[0].deliveryDetail[index].roadAddrDetail}'
+                                                      controller.deliveryDay.deliveryDetail[index].roadAddrDetail != ''
+                                                          ? '${controller.deliveryDay.deliveryDetail[index].roadAddrDetail}'
                                                           : '-',
                                                       style: TextStyle(
                                                         color: Color(0xff333D4B),
@@ -222,7 +216,7 @@ class DeliveryPathBottomWidget extends GetWidget<DeliveryController> {
 
 
                                                     Text(
-                                                      '파레트 KPP / ${controller.deliveryList[0].deliveryDetail[index].pltQty}개',
+                                                      '파레트 KPP / ${controller.deliveryDay.deliveryDetail[index].pltQty}개',
                                                       style: TextStyle(
                                                         fontFamily: 'Noto Sans',
                                                         fontSize: 13,

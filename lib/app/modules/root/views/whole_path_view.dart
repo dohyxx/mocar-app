@@ -361,7 +361,7 @@ class WholePathView extends GetView<DeliveryController> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: '상차 -',
+                                            text: '상차 09:00',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16,
@@ -405,8 +405,8 @@ class WholePathView extends GetView<DeliveryController> {
                                       TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: controller.deliveryList.length > 0 && controller.deliveryList[0].deliveryDetail[0].roadAddress != ''
-                                                ? '${controller.deliveryList[0].deliveryDetail[0].roadAddress}'
+                                            text: controller.deliveryDay.deliveryDetail.length > 0 && controller.deliveryDay.delSn != ''
+                                                ? '${controller.deliveryDay.deliveryDetail[0].roadAddress}'
                                                 : '-',
                                             style: TextStyle(
                                               color: Color(0xffFFFFFF),
@@ -439,8 +439,8 @@ class WholePathView extends GetView<DeliveryController> {
                                         children: [
                                           TextSpan(
                                             text:
-                                            controller.deliveryList.length > 0 && controller.deliveryList[0].deliveryDetail[1].roadAddress != ''
-                                                ? '${controller.deliveryList[0].deliveryDetail[1].roadAddress}'
+                                            controller.deliveryDay.deliveryDetail.length > 0 && controller.deliveryDay.delSn != ''
+                                                ? '${controller.deliveryDay.deliveryDetail[1].roadAddress}'
                                                 : '-',
                                             style: TextStyle(
                                               color: Color(0xffFFFFFF),
