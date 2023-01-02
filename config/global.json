@@ -1,5 +1,5 @@
 {
-  "laravel_base_url": "https://www.mocar.io/",
+  "laravel_base_url": "https://mocar.io/",
   "api_path": "api/app/",
   "received": 1,
   "accepted": 10,

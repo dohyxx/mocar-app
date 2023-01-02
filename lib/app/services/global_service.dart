@@ -8,9 +8,9 @@ class GlobalService extends GetxService {
   final global = Global().obs;
 
   Future<GlobalService> init() async {
-    // var response = await Helper.getJsonFile('config/global.json');
+    var response = await Helper.getJsonFile('config/global.json');
     // var response = await Helper.getJsonFile('config/global_test.json');
-    var response = await Helper.getJsonFile('config/global_dev.json');
+    // var response = await Helper.getJsonFile('config/global_dev.json');
     // var response = await Helper.getJsonFile('config/global_local.json');
 
     Get.log('<======GlobalService response: '+response.toString());
