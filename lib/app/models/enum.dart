@@ -55,3 +55,32 @@ extension nodeTypeCdExtension2 on NodeTypeCd {
 }
 
 
+/**
+ * 운반 업무 코드
+ */
+enum DriverWorkState {
+  M01,   // 시작 전
+  M02,   // 운반 중
+  M03,   // 완료
+}
+extension DriverWorkStateExtension1 on DriverWorkState {
+  String get stateText {
+    switch(this){
+      case DriverWorkState.M01: return "배송 시작";
+      case DriverWorkState.M02: return "배송 중";
+      case DriverWorkState.M03: return "배송 완료";
+      default: return null;
+    }
+  }
+}
+extension DriverWorkStateExtension2 on DriverWorkState {
+  Color get stateColor {
+    switch(this){
+      case DriverWorkState.M01: return Color(0xff00918f);
+      case DriverWorkState.M02: return Color(0xff01389c);
+      case DriverWorkState.M03: return Color(0xff3d3d3d);
+      default: return null;
+    }
+  }
+}
+
