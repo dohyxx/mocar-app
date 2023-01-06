@@ -43,7 +43,7 @@ class MainMonthListRowWidget extends GetWidget<RootController> {
                     ),
                   ),
                   Expanded(
-                    flex: 0,
+                    flex: 1,
                     child: Text('${Util.numberWithComma(controller.monthCostList[index].totalAmount, isDecimal: false)}원',
                       style: TextStyle(
                         fontSize: 14,

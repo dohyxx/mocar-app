@@ -183,7 +183,7 @@ class MonthListWidget extends GetWidget<CostController> {
                             ),
 
                             Expanded(
-                              flex: 0,
+                              flex: 1,
                               child: Text('배송 총 운임',
                                 style: TextStyle(
                                   fontSize: 10,
