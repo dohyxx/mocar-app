@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,21 +10,16 @@ import 'package:mocar_test/app/routes/app_routes.dart';
 
 class ConveyancePhotoController extends GetxController with GetSingleTickerProviderStateMixin {
 
-  // GlobalKey<FormState> loginFormKey;
   final isContentLoading = true.obs;
   ScrollController scrollController;
   ConveyancePhotoRepository conveyancePhotoRepository;
 
   final picker = ImagePicker();
-
-
-  //완료사진
-
-
   var vehicleRouteId;
-
   var completedPhotoUrl = <String>[].obs;
   Delivery deliveryDay;
+
+
 
   ConveyancePhotoController(){
     scrollController = new ScrollController();
@@ -44,7 +38,6 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
   void onRefresh() async {
     isContentLoading.value = true;
 
-    // getDispatchRouteList();
     deliveryDay = Get.find<DeliveryController>().deliveryDay.delSn != null ? Get.find<DeliveryController>().deliveryDay : null;
 
     if(deliveryDay != null){
@@ -87,7 +80,6 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
         return;
       }else{
         // 상하차지 1개 이상 사진 등록 여부 확인
-
         for(var i=0; i<deliveryDay.deliveryDetail.length; i++){
           if(deliveryDay.deliveryDetail[i].photo.length < 1){
             isRegisterPhotoYn = true;
@@ -113,7 +105,6 @@ class ConveyancePhotoController extends GetxController with GetSingleTickerProvi
           result = await completeDelivery(Get.find<DeliveryController>().deliveryDay.delSn);
         }
       }
-
 
       if(result != null && result == true){
         Util.alert('운송 완료 처리 되었습니다.', callback: (){

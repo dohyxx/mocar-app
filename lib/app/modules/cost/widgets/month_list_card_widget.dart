@@ -38,7 +38,6 @@ class MonthListCardWidget extends GetWidget<CostController> {
                 onPressed: () async {
                   controller.selectedMonth.value = month.value;
                   await controller.onRefresh();
-                  Get.log('<====== 월별정산 ${month.value}월 Click');
 
                   _scrollToColor();
                 },

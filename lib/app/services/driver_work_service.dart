@@ -69,7 +69,4 @@ class DriverWorkService extends GetxService {
     UserDetailRepository _userDetailRepository = UserDetailRepository();
     return await _userDetailRepository.getEnterpriseInfo();
   }
-
-
-
 }

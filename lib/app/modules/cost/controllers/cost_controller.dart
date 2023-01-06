@@ -12,13 +12,10 @@ class CostController extends GetxController with GetSingleTickerProviderStateMix
   ScrollController scrollController;
   CostRepository costRepository;
 
-
-
   var selectedMonth = Get.find<SettingsService>().today.month.obs;
   var monthList = <Widget>[].obs;
-
   var monthCostList = <Cost>[].obs;     //월별정산 리스트
-  var monthTotalCost = 0.obs;          //월별 총 운임료
+  var monthTotalCost = 0.obs;           //월별 총 운임료
   var monthCompletedCnt = 0.obs;        //월별 총 배송완료 건수
 
 
@@ -30,8 +27,6 @@ class CostController extends GetxController with GetSingleTickerProviderStateMix
       monthList.add(MonthListCardWidget(type: i, month: i.obs +1));
     }
   }
-
-
 
 
   @override
@@ -54,7 +49,6 @@ class CostController extends GetxController with GetSingleTickerProviderStateMix
 
     getMonthCost();
 
-
     Future.delayed(Duration(milliseconds: 600)) .then((onValue)
     => isContentLoading.value = false);
   }
@@ -74,12 +68,8 @@ class CostController extends GetxController with GetSingleTickerProviderStateMix
       monthCompletedCnt.value = data['monthCompletedCnt'];
       monthTotalCost.value = int.parse(data['monthTotalCost']);
 
-
       monthCostList.refresh();
-      //Get.log('<================ 월별정산 조회 in Controller: ' + data.toString());
-
     } catch (e) {
     }
   }
-
 }

@@ -6,7 +6,6 @@ import 'package:mocar_test/app/repositories/board_repository.dart';
 import 'package:mocar_test/app/services/driver_work_service.dart';
 
 class BoardController extends GetxController with GetSingleTickerProviderStateMixin {
-
   ScrollController scrollController;
   BoardRepository boardRepository;
   var noticeList = <Notice>[].obs;
@@ -16,6 +15,7 @@ class BoardController extends GetxController with GetSingleTickerProviderStateMi
     scrollController = new ScrollController();
     boardRepository = BoardRepository();
   }
+
 
   @override
   void onInit() async {
@@ -42,5 +42,4 @@ class BoardController extends GetxController with GetSingleTickerProviderStateMi
       Util.print(e);
     }
   }
-
 }

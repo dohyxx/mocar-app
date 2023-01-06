@@ -12,8 +12,6 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 
 class DeliveryController extends GetxController with GetSingleTickerProviderStateMixin {
-
-  // GlobalKey<FormState> loginFormKey;
   final isContentLoading = true.obs;
   final Completer<WebViewController> complete = Completer<WebViewController>();
 
@@ -29,7 +27,6 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
   var delTotalCost = 0.obs;               //총 금액
   var deliveryId = 0.obs; //맵 경로 ID
 
-  //TODO:: 드랍다운 텍스트 수정 필요
   var assignedTask = '진행상태'.obs;
   final rolesList = ['진행상태1', '진행상태2', '진행상태3'].obs;
 
@@ -42,7 +39,6 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
 
   @override
   void onInit() {
-    //loginFormKey = new GlobalKey<FormState>();
     super.onInit();
     onRefresh();
   }

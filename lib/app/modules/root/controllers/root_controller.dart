@@ -21,7 +21,6 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
 
   GetStorage _box = new GetStorage();
 
-
   var monthCostList = <Cost>[].obs;     //월별정산 리스트
   var alarmList = <Alarm>[].obs;        //알림 리스트
   var vehicle = Vehicle().obs;          //차량 정보
@@ -161,13 +160,13 @@ class RootController extends GetxController with GetSingleTickerProviderStateMix
     );
   }
 
-  void handleDoubleTapDown(TapDownDetails details) {
 
+  void handleDoubleTapDown(TapDownDetails details) {
     doubleTapDetails = details;
   }
 
-  void handleDoubleTap() {
 
+  void handleDoubleTap() {
     if (transController.value != Matrix4.identity()) {
       transController.value = Matrix4.identity();
     } else {
