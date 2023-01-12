@@ -49,9 +49,9 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
    */
   void onRefresh() async {
     isContentLoading.value = true;
-    await getDeliveryList();
+    getDeliveryList();
 
-    Future.delayed(Duration(milliseconds: 600)) .then((onValue)
+    Future.delayed(Duration(milliseconds: 900)) .then((onValue)
     => isContentLoading.value = false);
   }
 
@@ -97,6 +97,7 @@ class DeliveryController extends GetxController with GetSingleTickerProviderStat
         }
       }
 
+      deliveryList.refresh();
     } catch (e) {
       Util.print(e);
     }

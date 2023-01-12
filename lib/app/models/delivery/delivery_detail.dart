@@ -21,7 +21,7 @@ class DeliveryDetail extends Model {
   String attachImageUrl1;
   String attachImageUrl2;
   String attachImageUrl3;
-  int pltQty;                //파레트 개수
+  String pltQty;             //파레트 개수
   String orderNo;            //주문 번호
   String locMngName;         //담당자 이름
   String locMngEmail;        //담당자 이메일
@@ -39,7 +39,7 @@ class DeliveryDetail extends Model {
   DeliveryDetail.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
     routeId = intFromJson(json, 'node_id');
-    pltQty = intFromJson(json, 'plt_qty');
+    pltQty = stringFromJson(json, 'plt_qty');
     pickLocationId = intFromJson(json, 'pickup_loc_id');
     dropLocationId = intFromJson(json, 'drop_loc_id');
     nodeSeq = intFromJson(json, 'node_seq');
