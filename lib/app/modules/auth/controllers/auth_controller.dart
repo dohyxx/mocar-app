@@ -13,7 +13,6 @@ import '../../../models/vehicle_model.dart';
 class AuthController extends GetxController with GetSingleTickerProviderStateMixin {
   final Rx<User> currentUser = Get.find<AuthService>().user;
 
-  // GlobalKey<FormState> loginFormKey;
   final isContentLoading = true.obs;
   ScrollController scrollController;
 
@@ -55,7 +54,6 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
    */
   @override
   void onInit() {
-    //loginFormKey = new GlobalKey<FormState>();
     super.onInit();
     onRefresh();
   }
@@ -86,7 +84,11 @@ class AuthController extends GetxController with GetSingleTickerProviderStateMix
       currentUser.value.truckNumber = carNumber.text;
       currentUser.value.phoneNumber = phoneNumber.text;
       currentUser.value.password = pwdInput.text;
-      
+
+      // currentUser.value.truckNumber = '404가9999';
+      // currentUser.value.phoneNumber = '01063269166';
+      // currentUser.value.password = '91669999';
+
       var user = await _userRepository.login(currentUser.value);
 
       if(user != null) {
