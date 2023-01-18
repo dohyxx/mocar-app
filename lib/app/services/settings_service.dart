@@ -13,7 +13,7 @@ class SettingsService extends GetxService {
   SettingRepository _settingsRepo;
 
   DateTime today;
-  final routeMap = '${Get.find<GlobalService>().global.value.laravelBaseUrl}/tms/dispatch/routePopup/mobile?dispatch_order_id=';
+  final routeMap = '${Get.find<GlobalService>().global.value.laravelBaseUrl}tms/dispatch/routePopup/mobile?dispatch_order_id=';
 
   SettingsService() {
     _settingsRepo = new SettingRepository();
